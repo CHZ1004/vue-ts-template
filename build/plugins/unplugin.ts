@@ -39,7 +39,6 @@ export function configUnpluginPlugin(viteEnv: ImportMetaEnv): PluginOption[] {
       exclude,
       imports,
       dirs: ['src/store/modules'],
-      dts: 'types/auto-import.d.ts',
     }),
     Components({
       exclude,
@@ -49,7 +48,6 @@ export function configUnpluginPlugin(viteEnv: ImportMetaEnv): PluginOption[] {
         NaiveUiResolver(),
         IconsResolver({ customCollections: [collectionName], componentPrefix: VITE_ICON_PREFFIX }),
       ],
-      dts: 'types/components.d.ts',
     }),
   ];
 }
