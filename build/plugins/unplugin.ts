@@ -41,6 +41,7 @@ export function configUnpluginPlugin(viteEnv: ImportMetaEnv): PluginOption[] {
       dirs: ['src/store/modules'],
     }),
     Components({
+      include,
       exclude,
       dirs: ['src/common/**', 'src/components/**'],
       extensions: ['vue', 'tsx', 'jsx'],
