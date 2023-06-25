@@ -16,8 +16,8 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
-// import logo from '@/assets/images/logo.png';
 
+// TODO loading颜色需要为主颜色
 const title = ref('运营数据多维分析平台');
 const lodingClasses = [
   'left-0 top-0',

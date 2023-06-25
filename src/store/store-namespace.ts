@@ -1,3 +1,4 @@
-export const enum Names {
-  Demo = 'DEMO',
-}
+export const STORE_NAMES = {
+  DOME: 'DEMO',
+  AUTH: 'AUTH',
+};
