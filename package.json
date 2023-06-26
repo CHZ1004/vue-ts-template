@@ -35,7 +35,9 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.1",
+    "@iconify-json/gridicons": "^1.1.10",
     "@iconify-json/ic": "^1.1.13",
+    "@iconify-json/line-md": "^1.1.25",
     "@iconify-json/mdi": "^1.1.52",
     "@types/crypto-js": "^4.1.1",
     "@types/lodash-es": "^4.17.7",

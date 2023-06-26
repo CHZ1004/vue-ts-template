@@ -6,7 +6,7 @@
         <div
           v-for="(item, index) in lodingClasses"
           :key="index"
-          class="absolute w-16px h-16px bg-red rounded-8px animate-pulse"
+          class="absolute w-16px h-16px bg-blue rounded-8px animate-pulse"
           :class="item"
         ></div>
       </div>

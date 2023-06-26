@@ -31,9 +31,15 @@ devDependencies:
   '@commitlint/config-conventional':
     specifier: ^17.6.1
     version: 17.6.1
+  '@iconify-json/gridicons':
+    specifier: ^1.1.10
+    version: 1.1.10
   '@iconify-json/ic':
     specifier: ^1.1.13
     version: 1.1.13
+  '@iconify-json/line-md':
+    specifier: ^1.1.25
+    version: 1.1.25
   '@iconify-json/mdi':
     specifier: ^1.1.52
     version: 1.1.52
@@ -902,8 +908,20 @@ packages:
     resolution: {integrity: sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==}
     dev: true
 
+  /@iconify-json/gridicons@1.1.10:
+    resolution: {integrity: sha512-OEfxLSbZTcYE9pw8tTk/TBpNXlOFOHzngqFgY7iXa1aneBbcN1B554UGuQqy+e73P2P1kJtya2Q0IF/Z/p/QWQ==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
   /@iconify-json/ic@1.1.13:
     resolution: {integrity: sha512-5i5zal/VRwTrs99iMTnG1Zu97bgX9Mkiu9TzR1U1rHBylUnBW+HkOweoQVEPgQITGG024/lNbZxU+3Aa2xuDww==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/line-md@1.1.25:
+    resolution: {integrity: sha512-78d8RFQMj4zdGfEgPi74365sQD10aKyV8SoW6tY7vOH5hILIJQyI5xIzaX7QnsFrEm7UYzk+l1KoOaRfoHouxA==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

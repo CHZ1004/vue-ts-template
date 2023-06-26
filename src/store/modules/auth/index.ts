@@ -4,6 +4,7 @@ import { STORAGE_NAMES, STORE_NAMES } from '@/enums';
 import { LoginParams, LoginResponse, fetchLogin } from '@/api';
 import { local, wait } from '@/utils';
 import { getToken } from './helpers';
+import { useRouteStore } from '../route';
 
 interface AuthState {
   token: string;
@@ -23,10 +24,11 @@ export const useAuthStore = defineStore(STORE_NAMES.AUTH, {
   actions: {
     /** 登录后处理 */
     async handleActionAfterLogin(data: LoginResponse) {
-      console.log('🚀 ~ router:', router);
+      const route = useRouteStore();
       const { token } = data;
       const loginSuccess = await this.loginByToken(token);
       if (loginSuccess) {
+        await route.initAuthRoute();
         router.push({ name: 'HOME', replace: true });
       }
     },
