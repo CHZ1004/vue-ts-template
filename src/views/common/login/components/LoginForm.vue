@@ -8,16 +8,19 @@
       <n-form-item label="密码" path="password">
         <n-input v-model:value="formData.password" type="password" show-password-on="click"></n-input>
       </n-form-item>
-      <n-button type="primary" class="w-full">登录</n-button>
+      <n-button type="primary" class="w-full" :loading="auth.loginLoading" @click="configLogin">登录</n-button>
     </n-form>
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
 import { FormInst } from 'naive-ui';
+import type { LoginParams } from '@/api';
+import { useAuthStore } from '@/store';
 
+const auth = useAuthStore();
 const formRef = ref<FormInst | null>(null);
-const formData = ref({
+const formData = ref<LoginParams>({
   username: 'admin',
   password: 'admin',
 });
@@ -32,6 +35,9 @@ const rules = {
     message: '请输入密码',
     trigger: ['input'],
   },
+};
+const configLogin = async () => {
+  await auth.login(formData.value);
 };
 </script>
 <style scoped></style>
