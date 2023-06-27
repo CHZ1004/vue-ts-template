@@ -25,6 +25,7 @@
     ]
   },
   "dependencies": {
+    "colord": "^2.9.3",
     "crypto-js": "^4.1.1",
     "lodash-es": "^4.17.21",
     "naive-ui": "^2.34.4",
@@ -35,6 +36,8 @@
   "devDependencies": {
     "@commitlint/cli": "^17.6.1",
     "@commitlint/config-conventional": "^17.6.1",
+    "@iconify-json/akar-icons": "^1.1.17",
+    "@iconify-json/ci": "^1.1.9",
     "@iconify-json/gridicons": "^1.1.10",
     "@iconify-json/ic": "^1.1.13",
     "@iconify-json/line-md": "^1.1.25",

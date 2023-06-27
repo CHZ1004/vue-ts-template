@@ -7,7 +7,7 @@ interface AppState {
 }
 export const useAppStore = defineStore(STORE_NAMES.APP, {
   state: (): AppState => ({
-    siderCollapse: false,
+    siderCollapse: true,
   }),
   actions: {
     /** 设置侧边栏折叠状态 */

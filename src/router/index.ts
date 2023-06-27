@@ -1,9 +1,16 @@
-import { App } from 'vue';
+import { App, Component, h } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { lowerCase } from 'lodash-es';
+import { NIcon } from 'naive-ui';
 import { ROUTE_NAMES } from '@/enums';
+import IconCiHouse02 from '~icons/ci/house02';
+import IconAkarIconspentagon from '~icons/akar-icons/pentagon';
+import IconMdiCheckboxBlankOutline from '~icons/mdi/checkbox-blank-outline';
 
 const { VITE_BASE_URL } = import.meta.env;
+function renderIcon(icon: Component) {
+  return () => h(NIcon, null, { default: () => h(icon) });
+}
 export const routes = [
   {
     name: 'ROOT',
@@ -17,6 +24,7 @@ export const routes = [
         component: () => import('@/views/home/index.vue'),
         meta: {
           title: lowerCase(ROUTE_NAMES.HOME_NAME),
+          icon: renderIcon(IconCiHouse02),
         },
       },
       {
@@ -25,6 +33,7 @@ export const routes = [
         component: () => import('@/views/inspection/index.vue'),
         meta: {
           title: lowerCase(ROUTE_NAMES.INSPECTION_NAME),
+          icon: renderIcon(IconMdiCheckboxBlankOutline),
         },
       },
       {
@@ -33,6 +42,7 @@ export const routes = [
         component: () => import('@/views/scene/index.vue'),
         meta: {
           title: lowerCase(ROUTE_NAMES.SCENE_NAME),
+          icon: renderIcon(IconAkarIconspentagon),
         },
       },
     ],

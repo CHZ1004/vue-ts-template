@@ -23,15 +23,9 @@ export const alovaInstance = createAlova({
   responded: async (response) => {
     try {
       const data: Result = await response.json();
-      console.log('🚀 ~ response:', data);
       return data.result;
     } catch (error) {
       return error;
     }
   },
-});
-
-export const login = alovaInstance.Post<{ token: string }>('user/login', {
-  password: 'admin',
-  username: 'admin',
 });
