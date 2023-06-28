@@ -9,6 +9,10 @@ interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string;
   /** 项目描述 */
   readonly VITE_APP_DESC: string;
+  /** 网络请求基础url */
+  readonly VITE_API_URL: string;
+  /** 网络请求url前缀 */
+  readonly VITE_API_PREFFIX: string;
   /** iconify图标作为组件的前缀 */
   readonly VITE_ICON_PREFFIX: string;
   /**

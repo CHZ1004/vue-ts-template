@@ -1,6 +1,6 @@
 <template>
   <div v-if="showTooltip">
-    <a-tooltip :placement="placement" trigger="hover">
+    <a-tooltip v-if="showTooltip" :placement="placement" trigger="hover">
       <template #title>
         <div class="flex-center h-full cursor-pointer hover:bg-#eee">
           <slot></slot>
@@ -9,7 +9,7 @@
       {{ content }}
     </a-tooltip>
   </div>
-  <div v-else class="flex-center h-full cursor-pointer hover:bg-#eee">
+  <div v-else class="flex-center h-full cursor-pointer">
     <slot></slot>
   </div>
 </template>
