@@ -1,1 +1,8 @@
-@import './reset.css';
+/* @import './reset.css'; */
+@import './antdv.css';
+
+html,
+body,
+#app {
+  height: 100%;
+}
