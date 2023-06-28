@@ -1,26 +1,36 @@
 <template>
-  <div
-    v-for="item in list"
-    :key="item.name"
-    class="h-10 flex items-center justify-end hover:text-primary"
-    :class="{ 'text-primary': currentGroup === item.name }"
-    @click="currentGroup = item.name"
-  >
-    <Item></Item>
+  <div v-for="item in listData" :key="item.id" :class="classes(item.id)" @click="currentGroup = item.id">
+    <Item :data="item" @on-update="$emit('onUpdate', $event)" @on-delete="$emit('onDelete', $event)" />
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import Item from './item.vue';
+import { Combination } from '@/api';
 
-const list = [
-  {
-    name: '分组1',
+interface IProps {
+  listData?: Combination[];
+}
+defineEmits<{
+  (e: 'onUpdate', { data, reset }: { data: Combination; reset: () => void }): void;
+  (e: 'onDelete', id: string): void;
+}>();
+const props = withDefaults(defineProps<IProps>(), { listData: () => [] });
+const currentGroup = ref('');
+const classes = computed(() => {
+  const baseClass = 'h-10 flex items-center justify-end hover:text-primary';
+  return (id: string) => {
+    return `${baseClass} ${currentGroup.value === id ? 'text-primary' : ''}`;
+  };
+});
+watch(
+  () => props.listData,
+  (data) => {
+    data.length && (currentGroup.value = data[0].id);
   },
   {
-    name: '分组2',
+    immediate: true,
   },
-];
-const currentGroup = ref('分组1');
+);
 </script>
 <style lang="less" scoped></style>

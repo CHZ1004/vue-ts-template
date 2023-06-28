@@ -7,18 +7,25 @@
   </div>
   <div v-show="showAdd" class="flex items-center mt-4 mb-2">
     <a-input v-model:value="addValue" placeholder="分组名称" />
-    <a-button type="primary" class="ml-2">确定</a-button>
+    <a-button type="primary" class="ml-2" @click="$emit('onAdd', addValue, reset)">确定</a-button>
   </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue';
 
-defineEmits(['update:modelValue']);
+defineEmits<{
+  (e: 'update:modelValue'): void;
+  (e: 'onAdd', value: string, reset: () => void): void;
+}>();
 defineProps<{
   modelValue: string;
 }>();
 
 const addValue = ref('');
 const showAdd = ref(false);
+const reset = () => {
+  addValue.value = '';
+  showAdd.value = false;
+};
 </script>
 <style lang="less" scoped></style>

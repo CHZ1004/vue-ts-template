@@ -9,8 +9,10 @@ export const alovaInstance = createAlova({
   timeout: 70000,
   statesHook: VueHook,
   requestAdapter: GlobalFetch(),
-  beforeRequest() {
+  localCache: null,
+  beforeRequest(method) {
     // TODO:
+    method.config.headers['Content-Type'] = 'application/json;charset=UTF-8';
   },
   responded: {
     onSuccess: async (response) => {
