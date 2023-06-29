@@ -13,6 +13,11 @@ export const routes = [
         name: 'Home',
         component: () => import('@/views/home/index.vue'),
       },
+      {
+        path: '/special-account',
+        name: 'SpecialAccount',
+        component: () => import('@/views/special-account/index.vue'),
+      },
     ],
   },
 ];

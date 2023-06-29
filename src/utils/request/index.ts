@@ -19,7 +19,6 @@ export const alovaInstance = createAlova({
   responded: {
     onSuccess: async (response) => {
       const data = await response.json();
-      console.log('🚀 ~ response:', response, data);
       if (response.status === 500) {
         errorMessage('Internal Server Error');
         return Promise.reject(new Error('Internal Server Error'));
