@@ -10,3 +10,8 @@ export interface VolatilityResponse {
   volatility: string;
   growthRate: string;
 }
+
+export interface VolatilityItem {
+  date: string;
+  growthRate: string;
+}

@@ -51,7 +51,6 @@ const handlerChange = ({ date, code }: FormType) => {
   const [startDate, endDate] = date || [];
   return {
     id: code,
-    code,
     startDate: dayjs(startDate).format('YYYY-MM-DD'),
     endDate: dayjs(endDate).format('YYYY-MM-DD'),
   };

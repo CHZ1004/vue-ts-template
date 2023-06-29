@@ -14,6 +14,9 @@ import { useRequest } from 'alova';
 import { getVolatilityByCombination } from '@/api';
 import type { VolatilityParams, VolatilityResponse } from '@/api';
 
+const emit = defineEmits<{
+  (e: 'rowClick', code: string): void;
+}>();
 const props = defineProps<{
   params?: VolatilityParams;
 }>();
@@ -23,7 +26,7 @@ const { loading, data, send } = useRequest(() => getVolatilityByCombination(prop
 const customRow = (record: VolatilityResponse) => {
   return {
     onclick: () => {
-      console.log('xxx', record.code);
+      emit('rowClick', record.code);
     },
   };
 };
