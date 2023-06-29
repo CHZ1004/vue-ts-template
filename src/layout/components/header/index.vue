@@ -1,5 +1,5 @@
 <template>
-  <div class="h-12 shadow-sm bg-white">
+  <div class="flex-shrink-0 h-12 shadow-sm bg-white">
     <MenuCollapse></MenuCollapse>
   </div>
 </template>

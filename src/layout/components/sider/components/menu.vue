@@ -2,7 +2,7 @@
   <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="inline" @click="menuClick">
     <a-menu-item key="1">
       <user-outlined />
-      <span class="text-base">首页</span>
+      <span class="text-base">分组管理</span>
     </a-menu-item>
     <a-menu-item key="2">
       <video-camera-outlined />

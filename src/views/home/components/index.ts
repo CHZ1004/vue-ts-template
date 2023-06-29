@@ -1,4 +1,4 @@
-import Search from './search.vue';
-import List from './list.vue';
+import SiderGroup from './group/index.vue';
+import Combination from './combination/index.vue';
 
-export { Search, List };
+export { SiderGroup, Combination };
