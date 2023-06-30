@@ -1,32 +1,68 @@
-import { defineComponent, ref } from 'vue';
+import { defineComponent, h, computed } from 'vue';
 import { MenuOption, NMenu } from 'naive-ui';
-import { RouterLink } from 'vue-router';
-import { useAppStore } from '@/store';
+import { useRouter, useRoute } from 'vue-router';
+import { toLower } from 'lodash-es';
 
-const renderLabel = (title: string) => {
-  return <RouterLink to="/login">{title}</RouterLink>;
-};
+const images = import.meta.glob<typeof import('*.png')>('@/assets/images/**/*.png');
+const RenderIcon = defineComponent({
+  props: {
+    type: String,
+  },
+  setup(props) {
+    const route = useRoute();
+    const type = toLower(props.type);
+    const isActive = computed(() => props.type === route.name);
+    const keys = Object.keys(images);
+    const src = computed(() => {
+      return keys.filter((key) => {
+        const filter = `${type}${isActive.value ? '-active' : '.png'}`;
+        return key.includes(filter);
+      })[0];
+    });
+    return () => <img class="w-5 h-5" src={src.value}></img>;
+  },
+});
 
 export const Menu = defineComponent({
   name: 'LayoutSiderMenu',
-  setup() {
-    const app = useAppStore();
-    const activeKey = ref<string>('');
-    const expandedKeys = ref<string[]>([]);
+  props: {
+    collapsed: Boolean,
+  },
+  setup(props) {
+    const route = useRoute();
+    const router = useRouter();
+    const activeKey = computed<string>(() => (route.name || '') as string);
     const menus: MenuOption[] = [
       {
-        label: () => renderLabel('登录'),
-        key: 'login',
+        title: '首页',
+        key: 'HOME',
+        path: '/home',
+        icon: () => h(RenderIcon, { type: 'HOME' }),
+      },
+      {
+        title: '场景管理',
+        key: 'SCENE',
+        path: '/scene',
+        icon: () => h(RenderIcon, { type: 'SCENE' }),
+      },
+      {
+        title: '巡检管理',
+        key: 'INSPECTION',
+        path: '/inspection',
+        icon: () => h(RenderIcon, { type: 'INSPECTION' }),
       },
     ];
+    const handleUpdateMenu = (_key: string, item: MenuOption) => {
+      router.push({ name: item.key as string });
+    };
     return () => (
       <NMenu
         value={activeKey.value}
-        collapsed={app.siderCollapse}
-        collapsed-width={62}
+        collapsed={props.collapsed}
+        collapsed-width={64}
         options={menus}
-        expanded-keys={expandedKeys.value}
-      ></NMenu>
+        onUpdateValue={handleUpdateMenu}
+      />
     );
   },
 });

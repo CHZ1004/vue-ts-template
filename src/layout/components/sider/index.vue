@@ -1,41 +1,36 @@
 <template>
   <n-layout-sider bordered collapse-mode="width" :collapsed-width="64" :width="240" :collapsed="app.siderCollapse">
-    <div class="transition-all">
+    <div class="h-full transition-all">
       <LayoutLogo :show-title="!app.siderCollapse" />
-      <n-menu
-        :value="activeKey"
-        :collapsed="app.siderCollapse"
-        :collapsed-width="64"
-        :collapsed-icon-size="22"
-        :options="menuOptions"
-        @update:value="handleUpdateMenu"
-      />
+      <Menu :collapsed="app.siderCollapse" />
+      <!-- <div class="w-10 h-10 mx-auto bg-gray-100 rounded-lg overflow-hidden">
+        <div class="flex flex-col" @mouseenter="aaa = false" @mouseleave="aaa = true">
+          <Transition mode="out-in">
+            <div v-if="aaa" class="w-10 h-10 flex-center flex-shrink-0">
+              <icon-local-sunny class="text-2xl" />
+            </div>
+            <div v-else class="w-10 h-10 flex-center flex-shrink-0">
+              <icon-local-sunny:hove class="text-2xl" />
+            </div>
+          </Transition>
+        </div>
+      </div> -->
     </div>
   </n-layout-sider>
 </template>
 <script setup lang="ts">
-import { computed } from 'vue';
-import { MenuOption } from 'naive-ui';
-import { useRoute, useRouter } from 'vue-router';
 import { LayoutLogo } from '@/layout/components';
-import { useAppStore, useRouteStore } from '@/store';
+import { useAppStore } from '@/store';
+import { Menu } from './Menu';
 
-const route = useRoute();
-const router = useRouter();
 const app = useAppStore();
-const routeStore = useRouteStore();
-const menuOptions = routeStore.initStaticRoute();
-const activeKey = computed(() => route.name);
-const handleUpdateMenu = (_key: string, item: MenuOption) => {
-  router.push({ name: item.key as string });
-};
 </script>
 <style>
-.n-menu .n-menu-item {
-  margin-top: 0;
-}
 .n-menu .n-menu-item-content::before {
-  left: 0;
-  right: 0;
+  left: 12px;
+  right: 12px;
+  top: 1px;
+  bottom: 1px;
+  border-radius: 10px;
 }
 </style>

@@ -15,7 +15,4 @@ export enum ROUTE_NAMES {
   LOGIN = 'LOGIN',
   INSPECTION = 'INSPECTION',
   SCENE = 'SCENE',
-  HOME_NAME = '首页',
-  SCENE_NAME = '场景管理',
-  INSPECTION_NAME = '巡检管理',
 }

@@ -3,7 +3,7 @@
     <LayoutSider></LayoutSider>
     <n-layout>
       <LayoutHeader></LayoutHeader>
-      <n-layout-content>
+      <n-layout-content class="p-4 flex-1 bg-warm-gray-100">
         <router-view></router-view>
       </n-layout-content>
     </n-layout>
@@ -12,4 +12,8 @@
 <script setup lang="ts">
 import { LayoutHeader, LayoutSider } from './components';
 </script>
-<style lang="less" scoped></style>
+<style scoped>
+.n-layout-content {
+  height: calc(100% - 48px);
+}
+</style>
