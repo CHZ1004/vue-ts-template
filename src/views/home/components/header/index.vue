@@ -4,7 +4,7 @@
       <div class="flex items-center">
         <span>首页</span>
         <icon-mdi:slash-forward />
-        <span>名称</span>
+        <span>{{ title }}</span>
       </div>
       <div class="flex items-center">
         <IconHove class="w-8 h-8 ml-3" tooltip-content="添加场景">
@@ -25,7 +25,13 @@ import { h } from 'vue';
 import { useDialog } from 'naive-ui';
 import { IconHove, DialogTitle, DialogAction, DialogContent } from './components';
 
+defineProps<{
+  title: string;
+}>();
 const dialog = useDialog();
+const change = (templateName: string) => {
+  console.log('🚀 ~ templateName:', templateName);
+};
 const add = () => {
   const { destroy } = dialog.create({
     showIcon: false,
@@ -34,7 +40,7 @@ const add = () => {
     autoFocus: false,
     style: { width: '700px' },
     title: () => h(DialogTitle, { destroy, title: '切换设置' }),
-    content: () => h(DialogContent),
+    content: () => h(DialogContent, { onChange: change }),
     action: () => h(DialogAction, { destroy }),
   });
 };

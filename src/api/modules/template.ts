@@ -4,6 +4,7 @@ import { SceneGuoup, Scene } from '../model';
 enum Api {
   SceneList = 'template/list',
   SceneEnable = 'template/enable',
+  DefaultScene = 'template/get',
   SceneGuoupList = 'template-group/list',
 }
 
@@ -15,6 +16,11 @@ export const getScenes = (groupId: string) => {
 /** 设置默认场景模板 */
 export const setEnableScene = (templateId: string) => {
   return alovaInstance.Post(Api.SceneEnable, { templateId });
+};
+
+/** 获取默认场景模板 */
+export const getDefaultScene = () => {
+  return alovaInstance.Get<Scene>(Api.DefaultScene);
 };
 
 /** 获取模板分组 */

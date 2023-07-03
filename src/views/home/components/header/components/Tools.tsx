@@ -3,7 +3,7 @@ import { NButton } from 'naive-ui';
 import { defineComponent, ref, watch } from 'vue';
 import IconMdiClose from '~icons/mdi/close';
 import IconMdiSync from '~icons/mdi/sync';
-import { getSceneGroups, getScenes, setEnableScene } from '@/api';
+import { Scene, getSceneGroups, getScenes, setEnableScene } from '@/api';
 import { successMessage } from '@/utils';
 
 export const DialogTitle = defineComponent({
@@ -43,7 +43,8 @@ export const DialogAction = defineComponent({
 });
 
 export const DialogContent = defineComponent({
-  setup() {
+  emits: ['change'],
+  setup(_, { emit }) {
     const value = ref('');
     const { data: options } = useRequest(getSceneGroups);
     const { data: scenes, send } = useRequest(() => getScenes(value.value), { initialData: [] });
@@ -53,10 +54,11 @@ export const DialogContent = defineComponent({
         send(id);
       },
     );
-    const switchScene = async (templateId: string) => {
+    const switchScene = async ({ templateId, templateName }: Scene) => {
       await setEnableScene(templateId).send();
       await send(value.value);
       successMessage('修改成功');
+      emit('change', templateName);
     };
     return () => (
       <div class="p-4 pb-0">
@@ -76,7 +78,7 @@ export const DialogContent = defineComponent({
               <div class="flex items-center h-10 -mb-px px-3 border border-gray-200">
                 <span>{scene.templateName}</span>
                 {scene.enableStatus === '0' && (
-                  <div class="flex items-center ml-auto cursor-pointer" onClick={() => switchScene(scene.templateId)}>
+                  <div class="flex items-center ml-auto cursor-pointer" onClick={() => switchScene(scene)}>
                     <span class="mr-2 text-icon-color">切换视图</span>
                     <IconMdiSync class="text-#0F5EF7 text-xl" />
                   </div>
