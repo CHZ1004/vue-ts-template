@@ -1,9 +1,8 @@
 import { defineStore } from 'pinia';
 import { router } from '@/router';
-import { STORAGE_NAMES, STORE_NAMES } from '@/enums';
+import { STORE_NAMES } from '@/enums';
 import { LoginParams, LoginResponse, fetchLogin } from '@/api';
-import { local, wait } from '@/utils';
-import { getToken } from './helpers';
+import { getToken, wait } from '@/utils';
 
 interface AuthState {
   token: string;
@@ -41,7 +40,7 @@ export const useAuthStore = defineStore(STORE_NAMES.AUTH, {
     },
     /** token登录获取用户信息 */
     async loginByToken(token: string) {
-      local.set(STORAGE_NAMES.TOKEN, token);
+      getToken();
       // TODO 根据token获取用户信息, 并存储
       const successFlag = true;
       await wait(0);

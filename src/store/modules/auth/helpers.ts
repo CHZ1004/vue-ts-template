@@ -2,7 +2,7 @@ import { STORAGE_NAMES } from '@/enums';
 import { local } from '@/utils';
 
 /** 获取token */
-export function getToken() {
+export function getBaseToken() {
   return local.get(STORAGE_NAMES.TOKEN) || '';
 }
 

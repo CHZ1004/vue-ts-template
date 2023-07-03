@@ -37,9 +37,15 @@ devDependencies:
   '@iconify-json/akar-icons':
     specifier: ^1.1.17
     version: 1.1.17
+  '@iconify-json/ant-design':
+    specifier: ^1.1.5
+    version: 1.1.5
   '@iconify-json/ci':
     specifier: ^1.1.9
     version: 1.1.9
+  '@iconify-json/ep':
+    specifier: ^1.1.11
+    version: 1.1.11
   '@iconify-json/gridicons':
     specifier: ^1.1.10
     version: 1.1.10
@@ -52,6 +58,9 @@ devDependencies:
   '@iconify-json/mdi':
     specifier: ^1.1.52
     version: 1.1.52
+  '@iconify-json/uiw':
+    specifier: ^1.1.7
+    version: 1.1.7
   '@types/crypto-js':
     specifier: ^4.1.1
     version: 4.1.1
@@ -923,8 +932,20 @@ packages:
       '@iconify/types': 2.0.0
     dev: true
 
+  /@iconify-json/ant-design@1.1.5:
+    resolution: {integrity: sha512-lNEC95u9QdmS3GfMLnbAjLZCfQ9i4xURyn7P4UVHa6ejjLjs5FVyi/J+itrmnBpwb36YZo4CT0GDIn2AgvkNng==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
   /@iconify-json/ci@1.1.9:
     resolution: {integrity: sha512-ZMz5YTH7vz3PEM6j1v2GCxKsfjCtNYenyOS/c4xk2tBHPCUtUuSQvgnqO4INTOMb7dERHV5VLziXFChhcfn02A==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/ep@1.1.11:
+    resolution: {integrity: sha512-g08CJ1qod1FyqJk33sTH+PjcdBjukzBMscc+V0LjKi6jYg8EQSrJMolay/cgjWoqlHt6HP26fckQ+Efl8GlW1g==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true
@@ -949,6 +970,12 @@ packages:
 
   /@iconify-json/mdi@1.1.52:
     resolution: {integrity: sha512-tLzpFcmoGw1/jHcl+BshUd4bqvP4755OUluaARsuKskTp2aIPIAkRQOhzJGpry9CZ0i82z0alq4HrKrp9uvj4A==}
+    dependencies:
+      '@iconify/types': 2.0.0
+    dev: true
+
+  /@iconify-json/uiw@1.1.7:
+    resolution: {integrity: sha512-uc6eCKD4Lt7c1UHoUIPNZ++TfgqQqtyGS2GUeQ7soUz3xeJMMZvROgz+2giz+OsTVNTHeRXlxs8chNL2gOEXZA==}
     dependencies:
       '@iconify/types': 2.0.0
     dev: true

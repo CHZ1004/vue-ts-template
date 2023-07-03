@@ -1,5 +1,5 @@
 <template>
-  <HoverContainer class="w-40px h-full" tooltip-content="全屏" @click="toggle">
+  <HoverContainer class="w-40px h-full text-icon-color" tooltip-content="全屏" @click="toggle">
     <icon-gridicons-fullscreen-exit v-if="isFullscreen" class="text-2xl" />
     <icon-gridicons-fullscreen v-else class="text-2xl" />
   </HoverContainer>

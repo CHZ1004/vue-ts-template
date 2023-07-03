@@ -12,6 +12,9 @@ const themeOverrides: GlobalThemeOverrides = {
   common: {
     primaryColor: '#0F5EF7',
   },
+  Dialog: {
+    padding: 0,
+  },
 };
 </script>
 
