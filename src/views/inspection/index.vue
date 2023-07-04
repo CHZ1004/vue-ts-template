@@ -1,5 +1,54 @@
 <template>
-  <div>Inspection</div>
+  <div class="h-full">
+    <Groups
+      :loading="loading"
+      :list-data="data"
+      @change="onChange"
+      @search="onSearch"
+      @update="onUpdate"
+      @delete="onDelete"
+    />
+  </div>
 </template>
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+import { useRequest } from 'alova';
+import { InspectionGuoup, deleteInspectionGuoup, editInspectionGuoup, getInspectionGroups } from '@/api';
+import { successMessage } from '@/utils';
+
+const {
+  loading: allLoading,
+  data,
+  send,
+} = useRequest((name: string) => getInspectionGroups(name), { initialData: [] });
+const { loading: updateLoading, send: updateSend } = useRequest((data) => editInspectionGuoup(data), {
+  immediate: false,
+});
+const { loading: deleteLoading, send: deleteSend } = useRequest((id) => deleteInspectionGuoup(id), {
+  immediate: false,
+});
+
+const loading = computed(() => {
+  return allLoading.value || updateLoading.value || deleteLoading.value;
+});
+const onChange = (id: string) => {
+  console.log('🚀 ~ id:', id);
+};
+const tempValue = ref('');
+const onSearch = async (value: string) => {
+  tempValue.value = value;
+  await send(value);
+};
+const onUpdate = async (data: Partial<InspectionGuoup>) => {
+  await updateSend(data);
+  await send(tempValue.value);
+  successMessage('编辑成功');
+};
+const onDelete = async (id: string) => {
+  // TODO 删除当选中分组时，需要设置默认分组并且刷新页面
+  await deleteSend(id);
+  await send(tempValue.value);
+  successMessage('删除成功');
+};
+</script>
 <style scoped></style>

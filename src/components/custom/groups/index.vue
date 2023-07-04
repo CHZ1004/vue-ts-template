@@ -18,12 +18,13 @@
 </template>
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { SceneGuoup } from '@/api';
+import { InspectionGuoup, SceneGuoup } from '@/api';
 import { GroupSearch, GroupList, GroupIcon } from './components';
 
+type Guoup = SceneGuoup | InspectionGuoup;
 interface Props {
   loading: boolean;
-  listData: Array<SceneGuoup>;
+  listData: Array<Guoup>;
 }
 const emit = defineEmits(['update', 'delete', 'search', 'change']);
 defineProps<Props>();

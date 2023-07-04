@@ -19,6 +19,7 @@ import { successMessage } from '@/utils';
 const { loading: allLoading, data, send } = useRequest((name: string) => getSceneGroups(name), { initialData: [] });
 const { loading: updateLoading, send: updateSend } = useRequest((data) => editSceneGuoup(data), { immediate: false });
 const { loading: deleteLoading, send: deleteSend } = useRequest((id) => deleteSceneGuoup(id), { immediate: false });
+
 const loading = computed(() => {
   return allLoading.value || updateLoading.value || deleteLoading.value;
 });

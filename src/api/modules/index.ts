@@ -1,2 +1,3 @@
 export * from './auth';
-export * from './template';
+export * from './scene';
+export * from './inspection';
