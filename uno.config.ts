@@ -11,6 +11,7 @@ export default defineConfig({
   theme: {
     colors: {
       'icon-color': '#6D7A99',
+      primary: '#0F5EF7',
     },
   },
 });

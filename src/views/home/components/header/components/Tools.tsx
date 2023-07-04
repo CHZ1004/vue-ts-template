@@ -80,7 +80,7 @@ export const DialogContent = defineComponent({
                 {scene.enableStatus === '0' && (
                   <div class="flex items-center ml-auto cursor-pointer" onClick={() => switchScene(scene)}>
                     <span class="mr-2 text-icon-color">切换视图</span>
-                    <IconMdiSync class="text-#0F5EF7 text-xl" />
+                    <IconMdiSync class="text-primary text-xl" />
                   </div>
                 )}
               </div>

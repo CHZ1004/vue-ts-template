@@ -2,14 +2,14 @@
   <div v-if="showTooltip">
     <n-tooltip :placement="placement" trigger="hover">
       <template #trigger>
-        <div class="flex-center h-full cursor-pointer dark:hover:bg-#333" :class="contentClassName">
+        <div class="flex-center h-full cursor-pointer" :class="contentClassName">
           <slot></slot>
         </div>
       </template>
       {{ tooltipContent }}
     </n-tooltip>
   </div>
-  <div v-else class="flex-center cursor-pointer dark:hover:bg-#333" :class="contentClassName">
+  <div v-else class="flex-center cursor-pointer" :class="contentClassName">
     <slot></slot>
   </div>
 </template>
@@ -24,13 +24,19 @@ interface Props {
   placement?: PopoverPlacement;
   /** class类 */
   contentClass?: string;
+  /** 是否需要hover背景色 */
+  background?: boolean;
 }
 const props = withDefaults(defineProps<Props>(), {
   tooltipContent: '',
   placement: 'bottom',
   contentClass: '',
+  background: true,
 });
 const showTooltip = computed(() => Boolean(props.tooltipContent));
-const contentClassName = computed(() => `${props.contentClass} hover:bg-#f6f6f6`);
+const contentClassName = computed(() => {
+  const bgClass = props.background ? ' hover:bg-#f6f6f6 dark:hover:bg-#333' : '';
+  return `${props.contentClass}${bgClass}`;
+});
 </script>
 <style scoped></style>
