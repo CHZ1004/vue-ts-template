@@ -18,13 +18,13 @@
 </template>
 <script setup lang="ts">
 import { ref, watch } from 'vue';
-import { InspectionGuoup, SceneGuoup } from '@/api';
+import { InspectionGroup, SceneGroup } from '@/api';
 import { GroupSearch, GroupList, GroupIcon } from './components';
 
-type Guoup = SceneGuoup | InspectionGuoup;
+type Group = SceneGroup | InspectionGroup;
 interface Props {
   loading: boolean;
-  listData: Array<Guoup>;
+  listData: Array<Group>;
 }
 const emit = defineEmits(['update', 'delete', 'search', 'change']);
 defineProps<Props>();
@@ -41,7 +41,7 @@ watch(
     emit('change', value);
   },
   {
-    immediate: true,
+    // immediate: true,
   },
 );
 </script>

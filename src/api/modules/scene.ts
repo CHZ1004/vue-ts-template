@@ -1,5 +1,5 @@
 import { alovaInstance } from '@/utils';
-import { SceneGuoup, Scene } from '../model';
+import { SceneGroup, Scene } from '../model';
 
 enum Api {
   SceneList = 'template/list',
@@ -27,11 +27,11 @@ export const getDefaultScene = () => {
 
 /** 获取模板分组 */
 export const getSceneGroups = (groupName = '') => {
-  return alovaInstance.Get<SceneGuoup[]>(Api.SceneGuoupList, { params: { groupName } });
+  return alovaInstance.Get<SceneGroup[]>(Api.SceneGuoupList, { params: { groupName } });
 };
 
 /** 编辑/新增场景模板分组 */
-export const editSceneGuoup = (data: Partial<SceneGuoup>) => {
+export const editSceneGuoup = (data: Partial<SceneGroup>) => {
   return alovaInstance.Post(Api.EditSceneGuoups, data);
 };
 

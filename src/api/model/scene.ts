@@ -5,7 +5,7 @@ interface BaseSceneInfo {
   updateTime?: string;
 }
 
-export interface SceneGuoup extends BaseSceneInfo {
+export interface SceneGroup extends BaseSceneInfo {
   groupId: string;
   groupName: string;
   groupType: string;

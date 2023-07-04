@@ -1,5 +1,5 @@
 import { alovaInstance } from '@/utils';
-import { InspectionGuoup } from '../model';
+import { InspectionGroup } from '../model';
 
 enum Api {
   InspectionGroupList = 'inspection-group/list',
@@ -9,11 +9,11 @@ enum Api {
 
 /** 获取巡检场景分组 */
 export const getInspectionGroups = (groupName = '') => {
-  return alovaInstance.Get<InspectionGuoup[]>(Api.InspectionGroupList, { params: { groupName } });
+  return alovaInstance.Get<InspectionGroup[]>(Api.InspectionGroupList, { params: { groupName } });
 };
 
 /** 编辑/新增场景模板分组 */
-export const editInspectionGuoup = (data: Partial<InspectionGuoup>) => {
+export const editInspectionGuoup = (data: Partial<InspectionGroup>) => {
   return alovaInstance.Post(Api.EditInspectionGroup, data);
 };
 

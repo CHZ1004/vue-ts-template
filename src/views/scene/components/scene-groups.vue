@@ -1,32 +1,22 @@
 <template>
-  <div class="h-full">
-    <Groups
-      :loading="loading"
-      :list-data="data"
-      @change="onChange"
-      @search="onSearch"
-      @update="onUpdate"
-      @delete="onDelete"
-    />
-  </div>
+  <Groups
+    :loading="loading"
+    :list-data="data"
+    @change="onChange"
+    @search="onSearch"
+    @update="onUpdate"
+    @delete="onDelete"
+  />
 </template>
 <script setup lang="ts">
 import { computed, ref } from 'vue';
 import { useRequest } from 'alova';
-import { InspectionGroup, deleteInspectionGuoup, editInspectionGuoup, getInspectionGroups } from '@/api';
+import { SceneGroup, deleteSceneGuoup, editSceneGuoup, getSceneGroups } from '@/api';
 import { successMessage } from '@/utils';
 
-const {
-  loading: allLoading,
-  data,
-  send,
-} = useRequest((name: string) => getInspectionGroups(name), { initialData: [] });
-const { loading: updateLoading, send: updateSend } = useRequest((data) => editInspectionGuoup(data), {
-  immediate: false,
-});
-const { loading: deleteLoading, send: deleteSend } = useRequest((id) => deleteInspectionGuoup(id), {
-  immediate: false,
-});
+const { loading: allLoading, data, send } = useRequest((name: string) => getSceneGroups(name), { initialData: [] });
+const { loading: updateLoading, send: updateSend } = useRequest((data) => editSceneGuoup(data), { immediate: false });
+const { loading: deleteLoading, send: deleteSend } = useRequest((id) => deleteSceneGuoup(id), { immediate: false });
 
 const loading = computed(() => {
   return allLoading.value || updateLoading.value || deleteLoading.value;
@@ -39,7 +29,7 @@ const onSearch = async (value: string) => {
   tempValue.value = value;
   await send(value);
 };
-const onUpdate = async (data: Partial<InspectionGroup>) => {
+const onUpdate = async (data: Partial<SceneGroup>) => {
   await updateSend(data);
   await send(tempValue.value);
   successMessage('编辑成功');

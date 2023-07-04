@@ -1,46 +1,14 @@
 <template>
-  <div class="h-full">
-    <Groups
-      :loading="loading"
-      :list-data="data"
-      @change="onChange"
-      @search="onSearch"
-      @update="onUpdate"
-      @delete="onDelete"
-    />
+  <div class="h-full flex">
+    <SceneGroups />
+    <main class="flex-1 flex flex-col ml-4">
+      <SceneHeader />
+      <SceneCards class="flex-1" />
+      <ScenePagination />
+    </main>
   </div>
 </template>
 <script setup lang="ts">
-import { computed, ref } from 'vue';
-import { useRequest } from 'alova';
-import { SceneGuoup, deleteSceneGuoup, editSceneGuoup, getSceneGroups } from '@/api';
-import { successMessage } from '@/utils';
-
-const { loading: allLoading, data, send } = useRequest((name: string) => getSceneGroups(name), { initialData: [] });
-const { loading: updateLoading, send: updateSend } = useRequest((data) => editSceneGuoup(data), { immediate: false });
-const { loading: deleteLoading, send: deleteSend } = useRequest((id) => deleteSceneGuoup(id), { immediate: false });
-
-const loading = computed(() => {
-  return allLoading.value || updateLoading.value || deleteLoading.value;
-});
-const onChange = (id: string) => {
-  console.log('🚀 ~ id:', id);
-};
-const tempValue = ref('');
-const onSearch = async (value: string) => {
-  tempValue.value = value;
-  await send(value);
-};
-const onUpdate = async (data: Partial<SceneGuoup>) => {
-  await updateSend(data);
-  await send(tempValue.value);
-  successMessage('编辑成功');
-};
-const onDelete = async (id: string) => {
-  // TODO 删除当选中分组时，需要设置默认分组并且刷新页面
-  await deleteSend(id);
-  await send(tempValue.value);
-  successMessage('删除成功');
-};
+import { SceneGroups, SceneHeader, SceneCards, ScenePagination } from './components';
 </script>
 <style scoped></style>

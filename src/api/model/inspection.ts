@@ -5,7 +5,7 @@ interface BaseInspectionInfo {
   updateTime?: string;
 }
 
-export interface InspectionGuoup extends BaseInspectionInfo {
+export interface InspectionGroup extends BaseInspectionInfo {
   groupId: string;
   groupName: string;
   groupType: string;
