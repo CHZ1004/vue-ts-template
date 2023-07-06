@@ -1,5 +1,5 @@
 <template>
-  <n-card :class="shrink ? 'w-max' : 'w-65 h-full p-4'">
+  <n-card :class="shrink ? 'w-max absolute z-10' : 'w-65 h-full p-4'">
     <GroupIcon v-if="shrink" @click="setShrink(false)">
       <icon-mdi:chevron-right class="text-2xl" />
     </GroupIcon>
@@ -17,33 +17,36 @@
   </n-card>
 </template>
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { InspectionGroup, SceneGroup } from '@/api';
+import { computed } from 'vue';
+import { Group } from '@/api';
 import { GroupSearch, GroupList, GroupIcon } from './components';
 
-type Group = SceneGroup | InspectionGroup;
+type GroupType = Group;
 interface Props {
+  /** 当前选中的分组id */
+  value: string;
+  /** 分组展开状态 */
+  shrink: boolean;
+  /** 加载loading */
   loading: boolean;
-  listData: Array<Group>;
+  /** 分组数据 */
+  listData: Array<GroupType>;
 }
-const emit = defineEmits(['update', 'delete', 'search', 'change']);
-defineProps<Props>();
+const emit = defineEmits(['update', 'delete', 'search', 'update:value', 'update:shrink']);
+const props = defineProps<Props>();
 
-const shrink = ref(false);
 const setShrink = (value: boolean) => {
-  shrink.value = value;
+  emit('update:shrink', value);
 };
 
-const currentGroupId = ref<string>('');
-watch(
-  () => currentGroupId.value,
-  (value) => {
-    emit('change', value);
+const currentGroupId = computed({
+  get() {
+    return props.value;
   },
-  {
-    // immediate: true,
+  set(value) {
+    emit('update:value', value);
   },
-);
+});
 </script>
 <style scoped>
 :deep(.n-card__content) {

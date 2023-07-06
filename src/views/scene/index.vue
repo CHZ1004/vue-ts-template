@@ -1,14 +1,13 @@
 <template>
-  <div class="h-full flex">
-    <SceneGroups />
-    <main class="flex-1 flex flex-col ml-4">
-      <SceneHeader />
-      <SceneCards class="flex-1" />
-      <ScenePagination />
-    </main>
+  <div class="wh-full flex gap-4">
+    <SceneGroups v-model:value="groupId" />
+    <SceneMain :group-id="groupId" />
   </div>
 </template>
 <script setup lang="ts">
-import { SceneGroups, SceneHeader, SceneCards, ScenePagination } from './components';
+import { ref } from 'vue';
+import { SceneMain, SceneGroups } from './components';
+
+const groupId = ref('');
 </script>
 <style scoped></style>

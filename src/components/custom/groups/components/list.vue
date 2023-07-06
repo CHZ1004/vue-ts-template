@@ -10,12 +10,12 @@
 </template>
 <script setup lang="ts">
 import { computed } from 'vue';
-import type { SceneGroup } from '@/api';
+import type { Group } from '@/api';
 import Item from './item.vue';
 
 interface Props {
   value: string;
-  listData: SceneGroup[];
+  listData: Group[];
 }
 const emit = defineEmits(['update', 'delete', 'update:value']);
 const props = defineProps<Props>();

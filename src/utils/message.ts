@@ -8,8 +8,11 @@ const useDiscreteApi = () => {
     successMessage: (msg: string) => {
       message.success(msg);
     },
+    errorMessage: (msg: string) => {
+      message.error(msg);
+    },
   };
 };
 
-const { successMessage } = useDiscreteApi();
-export { successMessage };
+const { successMessage, errorMessage } = useDiscreteApi();
+export { successMessage, errorMessage };

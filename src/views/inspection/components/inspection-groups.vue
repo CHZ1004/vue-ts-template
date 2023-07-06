@@ -12,7 +12,7 @@
 <script setup lang="ts">
 import { computed, ref, watch } from 'vue';
 import { useRequest } from 'alova';
-import { Group, deleteSceneGuoup, editSceneGuoup, getSceneGroups } from '@/api';
+import { Group, deleteInspectionGuoup, editInspectionGuoup, getInspectionGroups } from '@/api';
 import { successMessage, events, EventType } from '@/utils';
 
 interface Props {
@@ -21,9 +21,13 @@ interface Props {
 const emit = defineEmits(['update:value']);
 const props = defineProps<Props>();
 // TODO 分组数据获取考虑使用其它方式代替 没必要每次进入都获取
-const { loading: getLoading, send, onSuccess } = useRequest((name: string) => getSceneGroups(name));
-const { loading: updateLoading, send: updateSend } = useRequest((data) => editSceneGuoup(data), { immediate: false });
-const { loading: deleteLoading, send: deleteSend } = useRequest((id) => deleteSceneGuoup(id), { immediate: false });
+const { loading: getLoading, send, onSuccess } = useRequest((name: string) => getInspectionGroups(name));
+const { loading: updateLoading, send: updateSend } = useRequest((data) => editInspectionGuoup(data), {
+  immediate: false,
+});
+const { loading: deleteLoading, send: deleteSend } = useRequest((id) => deleteInspectionGuoup(id), {
+  immediate: false,
+});
 
 const shrink = ref(false);
 watch(

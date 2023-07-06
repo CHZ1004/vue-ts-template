@@ -16,12 +16,12 @@ import { ref } from 'vue';
 import { debounce } from 'lodash-es';
 import Icon from './icon.vue';
 
-/** 搜索 */
 const emit = defineEmits(['search', 'add', 'shrink']);
+/** 搜索 */
 const searchValue = ref('');
 const searchInput = debounce(() => {
   emit('search', searchValue.value);
-}, 300);
+}, 500);
 
 /** 新增 */
 const addChange = (value: string) => {

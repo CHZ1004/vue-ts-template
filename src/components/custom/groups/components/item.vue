@@ -31,16 +31,16 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useBoolean } from '@/hooks';
-import { SceneGroup } from '@/api';
+import { Group } from '@/api';
 
 interface Emit {
   (e: 'update:value', id: string): void;
-  (e: 'update', data: Partial<SceneGroup>): void;
+  (e: 'update', data: Partial<Group>): void;
   (e: 'delete', id: string): void;
 }
 interface Props {
   value: string;
-  groupData: SceneGroup;
+  groupData: Group;
 }
 const emit = defineEmits<Emit>();
 const props = defineProps<Props>();
