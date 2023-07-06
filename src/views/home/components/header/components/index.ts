@@ -1,4 +1,4 @@
 import IconHove from './IconHove.vue';
 
-export * from './Tools';
+export * from './Content';
 export { IconHove };

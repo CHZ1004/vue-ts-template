@@ -34,7 +34,7 @@ import {
   inspectionSave,
 } from '@/api';
 import { successMessage, events, EventType } from '@/utils';
-import useMoveDialog from '@/hooks/useMoveDialog';
+import { useMoveDialog } from '@/hooks';
 
 interface Props {
   groupId: string;
@@ -106,3 +106,4 @@ const onMove = (data: Inspection) => {
 };
 </script>
 <style scoped></style>
+@/hooks/useDialog

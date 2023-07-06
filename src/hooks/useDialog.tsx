@@ -1,7 +1,11 @@
 import { defineComponent, h, PropType, Ref, ref } from 'vue';
-import { NButton, useDialog } from 'naive-ui';
+import { DialogOptions, NButton, useDialog } from 'naive-ui';
+// import { useRequest } from 'alova';
 import IconMdiClose from '~icons/mdi/close';
+// import IconMdiSync from '~icons/mdi/sync';
+// import { getSceneGroups, getScenes, setEnableScene } from '@/api';
 import type { Scene, Group, Inspection } from '@/api';
+// import { successMessage } from '@/utils';
 
 const DialogTitle = defineComponent({
   props: {
@@ -86,13 +90,7 @@ const moveContent = defineComponent({
     );
   },
 });
-export default function useMoveDialog({
-  options,
-  success,
-}: {
-  options: Ref<Group[]>;
-  success: (data: any) => Promise<void>;
-}) {
+export function useMoveDialog({ options, success }: { options: Ref<Group[]>; success: (data: any) => Promise<void> }) {
   const dialog = useDialog();
   const open = (data: Scene | Inspection) => {
     const updata = (id: string) => {
@@ -107,6 +105,27 @@ export default function useMoveDialog({
       title: () => h(DialogTitle, { destroy, title: '分组移动' }),
       content: () => h(moveContent, { options: options.value, groupId: data.groupId, 'onUpdate:groupId': updata }),
       action: () => h(DialogAction, { destroy, confirm: async () => success(data) }),
+    });
+  };
+  return {
+    open,
+  };
+}
+
+export function useSwitchDialog({ success, options }: { success: () => void; options: DialogOptions }) {
+  const dialog = useDialog();
+  const open = () => {
+    const confirm = () => {
+      success();
+    };
+    const { destroy } = dialog.create({
+      ...options,
+      showIcon: false,
+      closable: false,
+      maskClosable: false,
+      autoFocus: false,
+      title: () => h(DialogTitle, { destroy, title: (options.title || '') as string }),
+      action: () => h(DialogAction, { destroy, confirm }),
     });
   };
   return {

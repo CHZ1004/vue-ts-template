@@ -24,7 +24,7 @@ import { ref, watch } from 'vue';
 import { useRequest } from 'alova';
 import { Scene, Group, getPageScenes, sceneCopy, sceneDelete, sceneMove, sceneSave } from '@/api';
 import { successMessage, events, EventType } from '@/utils';
-import useMoveDialog from '@/hooks/useMoveDialog';
+import { useMoveDialog } from '@/hooks';
 
 interface Props {
   groupId: string;
@@ -96,3 +96,4 @@ const onMove = (data: Scene) => {
 };
 </script>
 <style scoped></style>
+@/hooks/useDialog

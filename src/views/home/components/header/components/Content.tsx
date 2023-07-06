@@ -1,48 +1,11 @@
-import { useRequest } from 'alova';
-import { NButton } from 'naive-ui';
 import { defineComponent, ref, watch } from 'vue';
-import IconMdiClose from '~icons/mdi/close';
+import { useRequest } from 'alova';
 import IconMdiSync from '~icons/mdi/sync';
-import { Scene, getSceneGroups, getScenes, setEnableScene } from '@/api';
+import { getSceneGroups, getScenes, setEnableScene } from '@/api';
+import type { Scene } from '@/api';
 import { successMessage } from '@/utils';
 
-export const DialogTitle = defineComponent({
-  props: {
-    destroy: Function,
-    title: String,
-  },
-  setup(props) {
-    const close = () => {
-      props.destroy && props.destroy();
-    };
-    return () => (
-      <div class="w-full h-11 px-5 flex items-center justify-between border-b border-gray-200">
-        <h3 class="text-base font-600">{props.title || '标题名称'}</h3>
-        <IconMdiClose class="text-#555F69 cursor-pointer" onClick={close} />
-      </div>
-    );
-  },
-});
-
-export const DialogAction = defineComponent({
-  props: {
-    destroy: Function,
-  },
-  setup(props) {
-    return () => (
-      <div class="p-4">
-        <NButton class="mr-5 px-7" onClick={() => props.destroy && props.destroy()}>
-          取消
-        </NButton>
-        <NButton type="primary" class="px-7">
-          确定
-        </NButton>
-      </div>
-    );
-  },
-});
-
-export const DialogContent = defineComponent({
+export const Content = defineComponent({
   emits: ['change'],
   setup(_, { emit }) {
     const value = ref('');

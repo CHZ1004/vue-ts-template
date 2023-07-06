@@ -10,10 +10,10 @@
         <IconHove class="w-8 h-8 ml-3" tooltip-content="添加场景">
           <icon-mdi:plus class="text-2xl" />
         </IconHove>
-        <IconHove class="w-8 h-8 ml-3" tooltip-content="切换场景" @click="add">
+        <IconHove class="w-8 h-8 ml-3" tooltip-content="切换场景" @click="open">
           <icon-ant-design:swap-outlined class="text-2xl" />
         </IconHove>
-        <IconHove class="w-8 h-8 ml-3" tooltip-content="全屏场景">
+        <IconHove class="w-8 h-8 ml-3" tooltip-content="全屏场景" @click="$emit('fullscreen')">
           <icon-mdi:fullscreen class="text-2xl" />
         </IconHove>
       </div>
@@ -21,29 +21,30 @@
   </n-card>
 </template>
 <script setup lang="ts">
-import { h } from 'vue';
-import { useDialog } from 'naive-ui';
-import { IconHove, DialogTitle, DialogAction, DialogContent } from './components';
+import { h, ref } from 'vue';
+import { useSwitchDialog } from '@/hooks';
+import { IconHove, Content } from './components';
 
-defineProps<{
+interface Props {
   title: string;
-}>();
-const dialog = useDialog();
-const change = (templateName: string) => {
-  console.log('🚀 ~ templateName:', templateName);
+}
+const props = defineProps<Props>();
+const emit = defineEmits(['refresh', 'fullscreen']);
+
+const refresh = ref(true);
+const onChange = (name: string) => {
+  refresh.value = props.title === name;
 };
-const add = () => {
-  const { destroy } = dialog.create({
-    showIcon: false,
-    closable: false,
-    maskClosable: false,
-    autoFocus: false,
+const { open } = useSwitchDialog({
+  success: () => {
+    !refresh.value && emit('refresh');
+  },
+  options: {
+    title: '切换设置',
     style: { width: '700px' },
-    title: () => h(DialogTitle, { destroy, title: '切换设置' }),
-    content: () => h(DialogContent, { onChange: change }),
-    action: () => h(DialogAction, { destroy }),
-  });
-};
+    content: () => h(Content, { onChange }),
+  },
+});
 </script>
 <style scoped>
 :deep(.n-card__content) {

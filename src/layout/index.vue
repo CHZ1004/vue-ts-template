@@ -4,7 +4,7 @@
     <n-layout>
       <LayoutHeader class="shadow-xl" />
       <n-layout-content>
-        <router-view class="p-4 flex-1 bg-warm-gray-100" />
+        <router-view class="h-full p-4 bg-warm-gray-100" />
       </n-layout-content>
     </n-layout>
   </n-layout>
