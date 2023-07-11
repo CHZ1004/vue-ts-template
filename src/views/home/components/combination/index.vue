@@ -12,7 +12,7 @@
       :data-source="listData"
       show-search
       :list-style="{ height: '100%', flex: 1 }"
-      :render="(item: CombinationItem) => item.name"
+      :render="(item: CombinationItem) => `【${item.code}】${item.name}`"
       @change="handleChange"
     />
   </a-card>
@@ -68,7 +68,7 @@ const uploading = async (event: Event) => {
   formData.append('file', file);
   try {
     const res = await uploadExcel(formData).send();
-    console.log('🚀 ~ res:', res);
+    data.value = res;
   } catch (error) {
     /**  */
   }

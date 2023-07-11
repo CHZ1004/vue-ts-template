@@ -1,6 +1,6 @@
 <template>
   <template v-if="!isEdit">
-    <span class="mr-auto cursor-pointer">{{ data.combinationName }}</span>
+    <span class="flex-1 mr-auto cursor-pointer">{{ data.combinationName }}</span>
     <hover-container class="w-6" @click.stop="isEdit = true">
       <form-outlined />
     </hover-container>

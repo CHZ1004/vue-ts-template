@@ -8,7 +8,7 @@
         v-model:value="formData.code"
         style="width: 160px"
         :field-names="fieldNames"
-        :options="options"
+        :options="data"
         @change="change(false)"
       />
     </a-form-item>
@@ -18,7 +18,7 @@
   </a-form>
 </template>
 <script setup lang="ts">
-import { computed, ref, onMounted } from 'vue';
+import { ref } from 'vue';
 import { useRequest } from 'alova';
 import dayjs, { Dayjs } from 'dayjs';
 import { stringify } from 'qs';
@@ -36,16 +36,20 @@ const formData = ref<FormType>({
   code: '',
 });
 const fieldNames = { label: 'combinationName', value: 'id' };
-const { data } = useRequest(getCombinationList);
-const options = computed(() => {
-  return [
-    {
-      combinationName: '全部组合',
-      id: '',
-    },
-    ...(data.value || []),
-  ];
+const { data, onSuccess } = useRequest(getCombinationList);
+onSuccess(({ data }) => {
+  formData.value.code = data[0].id;
+  emit('change', handlerChange(formData.value));
 });
+// const options = computed(() => {
+//   return [
+//     // {
+//     //   combinationName: '全部组合',
+//     //   id: '',
+//     // },
+//     ...(data.value || []),
+//   ];
+// });
 
 const handlerChange = ({ date, code }: FormType) => {
   const [startDate, endDate] = date || [];
@@ -66,8 +70,8 @@ const download = async () => {
   const herf = `${baseURL}${url}?${stringify(data)}`;
   window.open(herf, '_self');
 };
-onMounted(() => {
-  emit('change', handlerChange(formData.value));
-});
+// onMounted(() => {
+//   emit('change', handlerChange(formData.value));
+// });
 </script>
 <style lang="less" scoped></style>

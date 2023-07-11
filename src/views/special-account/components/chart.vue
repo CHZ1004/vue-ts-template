@@ -45,6 +45,9 @@ const option = ref({
   legend: {
     bottom: 0,
   },
+  grid: {
+    bottom: '10%',
+  },
   xAxis: {
     type: 'category',
     data: [] as string[],

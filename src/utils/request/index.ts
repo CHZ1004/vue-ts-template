@@ -12,7 +12,7 @@ export const alovaInstance = createAlova({
   requestAdapter: GlobalFetch(),
   localCache: null,
   beforeRequest(method) {
-    if (!method.config.headers['Content-Type'] && isFormData(method.data)) {
+    if (!method.config.headers['Content-Type'] && !isFormData(method.data)) {
       method.config.headers['Content-Type'] = 'application/json;charset=UTF-8';
     }
   },

@@ -2,22 +2,22 @@
   <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="inline" @click="menuClick">
     <a-menu-item key="Home">
       <div class="flex items-center text-base">
-        <icon-ic:baseline-density-medium />
+        <icon-formkit:group />
         <span class="ml-1">分组管理</span>
       </div>
     </a-menu-item>
     <a-menu-item key="SpecialAccount">
       <div class="flex items-center text-base">
-        <icon-ic:baseline-density-medium />
+        <icon-iconoir:reports />
         <span class="ml-1">专户报告</span>
       </div>
     </a-menu-item>
-    <a-menu-item key="3">
+    <!-- <a-menu-item key="3">
       <div class="flex items-center text-base">
         <icon-ic:baseline-density-medium />
         <span class="ml-1">nav 3</span>
       </div>
-    </a-menu-item>
+    </a-menu-item> -->
   </a-menu>
 </template>
 <script setup lang="ts">

@@ -1,6 +1,6 @@
 <template>
   <div class="flex">
-    <a-card class="flex-1">
+    <a-card class="flex-1" :body-style="{ height: 'calc(100% - 65px)', 'overflow-y': 'auto' }">
       <template #title>
         <SpecialForm @change="change" />
       </template>
