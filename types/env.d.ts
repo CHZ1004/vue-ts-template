@@ -9,6 +9,10 @@ interface ImportMetaEnv {
   readonly VITE_APP_TITLE: string;
   /** 项目描述 */
   readonly VITE_APP_DESC: string;
+  /** 请求基本url */
+  readonly VITE_API_URL: string;
+  /** 请求前缀 */
+  readonly VITE_API_PREFFIX: string;
   /** iconify图标作为组件的前缀 */
   readonly VITE_ICON_PREFFIX: string;
   /**
@@ -23,6 +27,8 @@ interface ImportMetaEnv {
   readonly VITE_COMPRESS?: 'Y' | 'N';
   /** 压缩算法类型 */
   readonly VITE_COMPRESS_TYPE?: 'gzip' | 'brotliCompress' | 'deflate' | 'deflateRaw';
+  /** 是否关闭alova推荐 */
+  readonly VITE_ALOVA_TIPS?: 0 | 1;
 }
 
 interface ImportMeta {

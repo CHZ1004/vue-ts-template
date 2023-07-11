@@ -1,16 +1,21 @@
-<script setup lang="ts"></script>
-
 <template>
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <h1 class="text-blue-500 bg-red-400">test</h1>
-    <icon-mdi-moon-waning-crescent class="text-3xl text-red-500" />
-    <icon-mdi-white-balance-sunny />
-    <icon-ic-baseline-arrow-forward-ios />
-    <icon-local-vue />
-  </div>
+  <NConfigProvider :locale="zhCN" :theme-overrides="themeOverrides" :date-locale="dateZhCN" class="h-full">
+    <NaiveProvider>
+      <RouterView class="h-full" />
+    </NaiveProvider>
+  </NConfigProvider>
 </template>
+<script setup lang="ts">
+import { zhCN, dateZhCN, GlobalThemeOverrides } from 'naive-ui';
+
+const themeOverrides: GlobalThemeOverrides = {
+  common: {
+    primaryColor: '#0F5EF7',
+  },
+  Dialog: {
+    padding: 0,
+  },
+};
+</script>
 
 <style scoped></style>
