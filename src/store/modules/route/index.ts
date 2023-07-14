@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { ROUTE_NAMES } from '@/router';
+import { STORE_NAMES } from '../../namespace';
 
 interface RouteState {
   menus: {
