@@ -1,36 +1,37 @@
 import { App } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { lowerCase } from 'lodash-es';
-import { ROUTE_NAMES } from '@/enums';
+import { ROUTE_NAMES } from './namespace';
 
 const { VITE_BASE_URL } = import.meta.env;
+const { HOME, INSPECTION, SCENE, LOGIN } = ROUTE_NAMES;
 export const routes = [
   {
     name: 'ROOT',
     path: '/',
-    redirect: `/${lowerCase(ROUTE_NAMES.HOME)}`,
+    redirect: `/${lowerCase(HOME)}`,
     component: () => import('@/layout/index.vue'),
     children: [
       {
-        name: ROUTE_NAMES.HOME,
-        path: `/${lowerCase(ROUTE_NAMES.HOME)}`,
+        name: HOME,
+        path: `/${lowerCase(HOME)}`,
         component: () => import('@/views/home/index.vue'),
       },
       {
-        name: ROUTE_NAMES.INSPECTION,
-        path: `/${lowerCase(ROUTE_NAMES.INSPECTION)}`,
+        name: INSPECTION,
+        path: `/${lowerCase(INSPECTION)}`,
         component: () => import('@/views/inspection/index.vue'),
       },
       {
-        name: ROUTE_NAMES.SCENE,
-        path: `/${lowerCase(ROUTE_NAMES.SCENE)}`,
+        name: SCENE,
+        path: `/${lowerCase(SCENE)}`,
         component: () => import('@/views/scene/index.vue'),
       },
     ],
   },
   {
-    name: ROUTE_NAMES.LOGIN,
-    path: `/${lowerCase(ROUTE_NAMES.LOGIN)}`,
+    name: LOGIN,
+    path: `/${lowerCase(LOGIN)}`,
     component: () => import('@/views/common/login/index.vue'),
   },
 ];
@@ -42,3 +43,5 @@ export const router = createRouter({
 export function setupRouter(app: App) {
   app.use(router);
 }
+
+export * from './namespace';

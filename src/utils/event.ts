@@ -1,14 +1,9 @@
 import mitt from 'mitt';
-import type { Group } from '@/api';
 
 type Events = {
-  SceneGroup: Group[];
-  RefreshSceneGroup: void;
-  GroupShrink: boolean;
+  RefreshGroups: void;
 };
 export enum EventType {
-  SceneGroup = 'SceneGroup',
-  RefreshSceneGroup = 'RefreshSceneGroup',
-  GroupShrink = 'GroupShrink',
+  RefreshGroups = 'RefreshGroups',
 }
 export const events = mitt<Events>();

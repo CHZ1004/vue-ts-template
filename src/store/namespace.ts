@@ -1,0 +1,7 @@
+export enum STORE_NAMES {
+  DOME = 'STORE_DEMO',
+  AUTH = 'STORE_AUTH',
+  APP = 'STORE_APP',
+  ROUTE = 'STORE_ROUTE',
+  GROUP = 'STORE_GROUP',
+}

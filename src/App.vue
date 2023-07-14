@@ -16,6 +16,8 @@ const themeOverrides: GlobalThemeOverrides = {
     padding: 0,
   },
 };
+
+subscribeStore();
 </script>
 
 <style scoped></style>

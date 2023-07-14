@@ -19,8 +19,10 @@ const props = withDefaults(
   },
 );
 const value = ref<string>(props.initValue);
+
 const update = () => {
   if (value.value === props.initValue) return;
+  if (!value.value) return;
   emit('change', value.value);
   value.value = '';
 };
@@ -35,6 +37,12 @@ const autoFocus = () => {
     inputRef.value?.focus();
   });
 };
+watch(
+  () => props.initValue,
+  (v) => {
+    value.value = v;
+  },
+);
 watch(
   () => is.value,
   (is) => {

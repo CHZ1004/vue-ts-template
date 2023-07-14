@@ -21,6 +21,7 @@ export function configUnpluginPlugin(viteEnv: ImportMetaEnv): PluginOption[] {
     'vue-router',
     {
       '@vueuse/core': [],
+      alova: [],
     },
   ];
   return [
@@ -38,7 +39,7 @@ export function configUnpluginPlugin(viteEnv: ImportMetaEnv): PluginOption[] {
       include,
       exclude,
       imports,
-      dirs: ['src/store/modules'],
+      dirs: ['src/store/modules', 'src/store/subscribe'],
     }),
     Components({
       include,

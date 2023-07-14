@@ -12,7 +12,7 @@ async function init() {
 
   const app = createApp(App);
   setupRouter(app);
-  setupStore(app);
+  await setupStore(app);
   appLoading.unmount();
   app.mount('#app');
 }

@@ -1,4 +1,4 @@
-import { defineComponent, h, PropType, Ref, ref } from 'vue';
+import { defineComponent, h, PropType, ref } from 'vue';
 import { DialogOptions, NButton, useDialog } from 'naive-ui';
 // import { useRequest } from 'alova';
 import IconMdiClose from '~icons/mdi/close';
@@ -90,7 +90,7 @@ const moveContent = defineComponent({
     );
   },
 });
-export function useMoveDialog({ options, success }: { options: Ref<Group[]>; success: (data: any) => Promise<void> }) {
+export function useMoveDialog({ options, success }: { options: Group[]; success: (data: any) => Promise<void> }) {
   const dialog = useDialog();
   const open = (data: Scene | Inspection) => {
     const updata = (id: string) => {
@@ -103,7 +103,7 @@ export function useMoveDialog({ options, success }: { options: Ref<Group[]>; suc
       autoFocus: false,
       style: { width: '500px' },
       title: () => h(DialogTitle, { destroy, title: '分组移动' }),
-      content: () => h(moveContent, { options: options.value, groupId: data.groupId, 'onUpdate:groupId': updata }),
+      content: () => h(moveContent, { options, groupId: data.groupId, 'onUpdate:groupId': updata }),
       action: () => h(DialogAction, { destroy, confirm: async () => success(data) }),
     });
   };

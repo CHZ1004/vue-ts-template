@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia';
 import { router } from '@/router';
-import { STORE_NAMES } from '@/enums';
+import { STORE_NAMES } from '../../namespace';
 import { LoginParams, LoginResponse, fetchLogin } from '@/api';
 import { getToken, wait } from '@/utils';
 
