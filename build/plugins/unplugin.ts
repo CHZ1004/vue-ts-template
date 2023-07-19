@@ -21,7 +21,8 @@ export function configUnpluginPlugin(viteEnv: ImportMetaEnv): PluginOption[] {
     'vue-router',
     {
       '@vueuse/core': [],
-      alova: [],
+      nanoid: ['nanoid'],
+      alova: ['useRequest'],
     },
   ];
   return [

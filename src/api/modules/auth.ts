@@ -1,5 +1,5 @@
 import { alovaInstance } from '@/utils';
-import { LoginResponse, LoginParams } from '../model';
+import type { LoginResponse, LoginParams } from '../model';
 
 enum Api {
   LOGIN = 'user/login',

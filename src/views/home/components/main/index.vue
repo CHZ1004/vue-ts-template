@@ -1,7 +1,7 @@
 <template>
   <div>
     <n-card>
-      <n-form :model="model" :rules="rules" label-placement="top" require-mark-placement="left">
+      <n-form ref="formRef" :model="model" :rules="rules" label-placement="top" require-mark-placement="left">
         <n-form-item label="展示类型" label-placement="left" path="displayType">
           <n-radio-group v-model:value="model.displayType">
             <n-radio-button v-for="item in DisplayType" :key="item.value" :label="item.label" :value="item.value" />
@@ -16,46 +16,41 @@
           v-model:granularity="model.granularity"
           path="templateTime"
         />
-        <n-form-item label="系统选择" required>
-          <n-grid :cols="12" :x-gap="16">
-            <n-gi
-              v-for="(_, index) in model.templateData"
-              :key="index"
-              :span="12 / model.templateData.length"
-              class="p-3 border-1 border-[var(--n-border-color)]"
-            >
-              <n-form-item label="系统" required size="small">
-                <n-input></n-input>
-              </n-form-item>
-              <n-form-item required size="small">
-                <template #label>
-                  <span>IP地址</span>
-                  <n-button text type="primary">清空</n-button>
-                </template>
-                <n-input></n-input>
-              </n-form-item>
-              <n-grid :cols="2" :x-gap="16">
-                <n-gi :span="1" class="mb-6px">指标</n-gi>
-                <n-gi :span="1" class="mb-6px">图表</n-gi>
-              </n-grid>
-              <n-grid :cols="2" :x-gap="16">
-                <n-form-item-gi :span="1" class="mb-2" size="small" :show-label="false" :show-feedback="false">
-                  <n-select></n-select>
-                </n-form-item-gi>
-                <n-form-item-gi :span="1" class="mb-2" size="small" :show-label="false" :show-feedback="false">
-                  <n-select></n-select>
-                </n-form-item-gi>
-              </n-grid>
-            </n-gi>
-          </n-grid>
+        <n-form-item label="系统选择" required class="grid-cols-4 grid-cols-3 grid-cols-2 grid-cols-1">
+          <Draggable
+            :list="model.templateData"
+            item-key="key"
+            handle=".handle"
+            class="w-full grid gap-4"
+            :class="`grid-cols-${model.templateData.length}`"
+          >
+            <template #item="{ element, index }">
+              <HoveHandle
+                :add-hide="addHide"
+                :delete-hide="deleteAndMoveHide"
+                :move-hide="deleteAndMoveHide"
+                @add="addSystem(index + 1)"
+                @delete="deleteSystem(index)"
+              >
+                <SystemItem :system-options="systemOptions" :system-data="element" :index="index" />
+              </HoveHandle>
+            </template>
+          </Draggable>
         </n-form-item>
       </n-form>
     </n-card>
+    <n-button @click="confirm">确定</n-button>
   </div>
 </template>
 <script setup lang="ts">
-import { ref } from 'vue';
+import { FormInst } from 'naive-ui';
+import Draggable from 'vuedraggable';
+import { getSystemList } from '@/api';
+import SystemItem from './SystemItem.vue';
+import HoveHandle from './HoveHandle.vue';
+import { events } from '@/utils';
 
+const { data: systemOptions } = useRequest(getSystemList, { initialData: [] });
 const DisplayType = [
   {
     value: 'system',
@@ -66,22 +61,76 @@ const DisplayType = [
     label: '对比时间',
   },
 ];
+const confirm = () => {
+  console.log('model.value', model.value);
+  formRef.value?.validate((errors) => {
+    if (!errors) {
+      console.log('验证通过');
+    } else {
+      console.log(errors);
+    }
+  });
+};
+
+const createIndicatorData = () => ({
+  key: nanoid(),
+  indicator: null,
+  type: null,
+});
+const createTemplateData = (num = 1) => ({
+  key: nanoid(),
+  system: null,
+  systemName: '',
+  ips: [],
+  ipIdList: null,
+  dataList: [...new Array(num)].map(() => createIndicatorData()),
+});
+const formRef = ref<FormInst | null>(null);
 const model = ref({
   displayType: 'system',
   templateName: '',
   templateTime: '',
   timeType: '',
   granularity: '',
-  templateData: [{}, {}],
+  templateData: [createTemplateData(), createTemplateData()],
+});
+const addHide = computed(() => model.value.templateData.length > 3);
+const deleteAndMoveHide = computed(() => model.value.templateData.length < 2);
+const addSystem = (index: number) => {
+  const len = model.value.templateData[0].dataList.length;
+  model.value.templateData.splice(index, 0, createTemplateData(len));
+};
+const deleteSystem = (index: number) => {
+  model.value.templateData.splice(index, 1);
+};
+events.on('HandelrIndicator', ({ type, index, data }) => {
+  model.value.templateData.map((item) => {
+    switch (type) {
+      case 'add':
+        item.dataList.splice(index, 0, createIndicatorData());
+        break;
+      case 'minus':
+        item.dataList.splice(index, 1);
+        break;
+      case 'update':
+        Object.assign(item.dataList[index], data);
+        break;
+      default:
+        break;
+    }
+    return item;
+  });
 });
 const rules = ref({
   templateName: {
     required: true,
     message: '请输入场景名称',
+    trigger: ['blur'],
   },
   templateTime: {
     required: true,
     message: '请选择时间',
+    trigger: ['change'],
   },
 });
 </script>
@@ -92,6 +141,31 @@ const rules = ref({
 }
 :deep(.n-form-item-label__text) {
   flex: 1;
+  display: flex;
+  justify-content: space-between;
+}
+:deep(.n-base-selection-overlay__wrapper) {
+  display: flex;
+  align-items: center;
+}
+:deep(.n-base-selection-overlay__wrapper span:nth-child(2)::after) {
+  content: '】';
+}
+:deep(.n-base-selection-overlay__wrapper span:nth-child(2)::before) {
+  content: '【';
+}
+:deep(.n-n-tag__content) {
+  display: flex;
+  align-items: center;
+}
+:deep(.n-tag__content span:nth-child(2)::after) {
+  content: '】';
+}
+:deep(.n-tag__content span:nth-child(2)::before) {
+  content: '【';
+}
+:deep(.n-base-select-option__content) {
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
