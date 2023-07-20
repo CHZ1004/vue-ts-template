@@ -1,3 +1,3 @@
-export const enum Names {
-  Demo = 'DEMO',
+export const enum SotreNames {
+  App = 'STORE_APP',
 }

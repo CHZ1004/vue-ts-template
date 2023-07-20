@@ -3,7 +3,7 @@ import type { PluginOption } from 'vite';
 import type { Arrayable } from '@vueuse/core';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
-import { NaiveUiResolver } from 'unplugin-vue-components/resolvers';
+import { AntDesignVueResolver } from 'unplugin-vue-components/resolvers';
 import { FileSystemIconLoader } from 'unplugin-icons/loaders';
 import Icons from 'unplugin-icons/vite';
 import IconsResolver from 'unplugin-icons/resolver';
@@ -21,6 +21,7 @@ export function configUnpluginPlugin(viteEnv: ImportMetaEnv): PluginOption[] {
     'vue-router',
     {
       '@vueuse/core': [],
+      alova: ['useRequest'],
     },
   ];
   return [
@@ -42,10 +43,10 @@ export function configUnpluginPlugin(viteEnv: ImportMetaEnv): PluginOption[] {
     }),
     Components({
       exclude,
-      dirs: ['src/common/**', 'src/components/**'],
+      dirs: ['src/components/**'],
       extensions: ['vue', 'tsx', 'jsx'],
       resolvers: [
-        NaiveUiResolver(),
+        AntDesignVueResolver({ importStyle: false }),
         IconsResolver({ customCollections: [collectionName], componentPrefix: VITE_ICON_PREFFIX }),
       ],
     }),
