@@ -1,28 +1,33 @@
 <template>
   <a-menu v-model:selectedKeys="selectedKeys" theme="light" mode="inline" @click="menuClick">
     <a-menu-item key="Home">
-      <div class="flex items-center text-base">
-        <icon-formkit:group />
-        <span class="ml-1">分组管理</span>
-      </div>
+      <Icon>
+        <template #component>
+          <icon-formkit:group />
+        </template>
+      </Icon>
+      <span class="ml-1">分组管理</span>
     </a-menu-item>
     <a-menu-item key="SpecialAccount">
-      <div class="flex items-center text-base">
-        <icon-iconoir:reports />
-        <span class="ml-1">专户报告</span>
-      </div>
+      <Icon>
+        <template #component>
+          <icon-iconoir:reports />
+        </template>
+      </Icon>
+      <span>专户报告</span>
     </a-menu-item>
-    <!-- <a-menu-item key="3">
-      <div class="flex items-center text-base">
-        <icon-ic:baseline-density-medium />
-        <span class="ml-1">nav 3</span>
-      </div>
-    </a-menu-item> -->
+    <a-menu-item key="Daily">
+      <Icon>
+        <template #component>
+          <icon-iconoir:graph-up />
+        </template>
+      </Icon>
+      <span class="ml-1">城投日报</span>
+    </a-menu-item>
   </a-menu>
 </template>
 <script setup lang="ts">
-import { ref, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
+import Icon from '@ant-design/icons-vue';
 
 const router = useRouter();
 const route = useRoute();

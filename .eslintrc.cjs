@@ -71,6 +71,7 @@ module.exports = defineConfig({
     '@typescript-eslint/ban-types': 'off',
     '@typescript-eslint/no-non-null-assertion': 'off', // 禁止非空断言
     'class-methods-use-this': 'off', // 因为AxiosCancel必须实例化而能静态化所以加的规则，如果有办法解决可以取消
+    'no-undef': 'off',
   },
   overrides: [
     {
@@ -80,6 +81,7 @@ module.exports = defineConfig({
         'vue/multi-word-component-names': 0,
         'vue/no-reserved-props': 0,
         'vue/no-v-html': 0,
+        'vue/no-unused-refs': 1,
       },
     },
     {

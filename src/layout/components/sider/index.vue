@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider v-model:collapsed="app.collapse" theme="light" :trigger="null" collapsible class="shadow-sm">
+  <a-layout-sider v-model:collapsed="app.collapse" collapsible theme="light" :trigger="null" class="shadow-sm">
     <SiderLogo :show-title="app.collapse" />
     <SiderMenu />
   </a-layout-sider>

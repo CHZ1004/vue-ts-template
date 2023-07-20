@@ -18,6 +18,11 @@ export const routes = [
         name: 'SpecialAccount',
         component: () => import('@/views/special-account/index.vue'),
       },
+      {
+        path: '/daily',
+        name: 'Daily',
+        component: () => import('@/views/daily/index.vue'),
+      },
     ],
   },
 ];
