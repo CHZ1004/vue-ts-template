@@ -17,6 +17,7 @@ const themeOverrides: GlobalThemeOverrides = {
   },
   Dialog: {
     padding: 0,
+    contentMargin: 0,
   },
 };
 

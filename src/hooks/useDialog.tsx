@@ -1,11 +1,6 @@
-import { defineComponent, h, PropType, ref } from 'vue';
 import { DialogOptions, NButton, useDialog } from 'naive-ui';
-// import { useRequest } from 'alova';
 import IconMdiClose from '~icons/mdi/close';
-// import IconMdiSync from '~icons/mdi/sync';
-// import { getSceneGroups, getScenes, setEnableScene } from '@/api';
 import type { Scene, Group, Inspection } from '@/api';
-// import { successMessage } from '@/utils';
 
 const DialogTitle = defineComponent({
   props: {
@@ -36,12 +31,13 @@ const DialogAction = defineComponent({
       props.destroy && props.destroy();
     };
     const confirm = async () => {
+      let hide = true;
       try {
         if (props.confirm) {
           loading.value = true;
-          await props.confirm();
+          hide = await props.confirm();
         }
-        destroy();
+        hide && destroy();
       } finally {
         loading.value = false;
       }
@@ -126,6 +122,27 @@ export function useSwitchDialog({ success, options }: { success: () => void; opt
       autoFocus: false,
       title: () => h(DialogTitle, { destroy, title: (options.title || '') as string }),
       action: () => h(DialogAction, { destroy, confirm }),
+    });
+  };
+  return {
+    open,
+  };
+}
+interface UseDialog {
+  success: (() => Promise<void>) | (() => void);
+  options: DialogOptions;
+}
+export function useSceneDialog({ options, success }: UseDialog) {
+  const dialog = useDialog();
+  const open = () => {
+    const { destroy } = dialog.create({
+      ...options,
+      showIcon: false,
+      closable: false,
+      maskClosable: false,
+      autoFocus: false,
+      title: () => h(DialogTitle, { destroy, title: (options.title || '') as string }),
+      action: () => h(DialogAction, { destroy, confirm: success }),
     });
   };
   return {

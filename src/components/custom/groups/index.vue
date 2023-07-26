@@ -1,9 +1,9 @@
 <template>
-  <n-card :class="shrink ? 'w-max absolute z-10' : 'w-65 h-full p-4'">
+  <n-card :class="shrink ? 'w-max absolute z-10' : 'w-65 h-full p-4'" class="hidden sm:hidden md:block">
     <GroupIcon v-if="shrink" @click="setShrink(false)">
       <icon-mdi:chevron-right class="text-2xl" />
     </GroupIcon>
-    <n-spin v-else :show="loading" class="group-spin h-full">
+    <n-spin v-else :show="loading" class="h-full">
       <n-space vertical :size="16">
         <GroupSearch @search="$emit('search', $event)" @add="$emit('update', $event)" @shrink="setShrink(true)" />
         <GroupList

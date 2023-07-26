@@ -1,6 +1,6 @@
 <template>
   <n-grid :cols="24" :x-gap="16">
-    <n-form-item-gi :span="18" label="时间" :path="path">
+    <n-form-item-gi :span="18" label="时间" :path="path" :rule="rule">
       <n-popover v-model:show="show" raw trigger="click" :show-arrow="false" placement="bottom">
         <template #trigger>
           <n-input v-model:value="templateTime" readonly placeholder="选择时间">
@@ -37,6 +37,7 @@
 <script setup lang="ts">
 import { ref, computed, watch } from 'vue';
 import dayjs from 'dayjs';
+import { FormItemRule } from 'naive-ui';
 
 const defaultTime = ['00:00:00', '23:59:59'];
 const GranularityOptions = [
@@ -153,6 +154,8 @@ interface Props {
   type: typeof TimeType | string;
   /** 校验 */
   path?: string;
+  /** 校验 */
+  rule?: FormItemRule | Array<FormItemRule>;
 }
 const props = defineProps<Props>();
 const emit = defineEmits(['update:time', 'update:granularity', 'update:type']);
