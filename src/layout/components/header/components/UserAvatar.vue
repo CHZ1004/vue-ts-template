@@ -8,6 +8,8 @@
 <script setup lang="ts">
 import { DropdownOption } from 'naive-ui';
 
+const auth = useAuthStore();
+
 const options: DropdownOption[] = [
   {
     label: '退出登录',
@@ -15,7 +17,7 @@ const options: DropdownOption[] = [
   },
 ];
 const handleDropdown = () => {
-  // here
+  auth.logout();
 };
 </script>
 <style scoped></style>

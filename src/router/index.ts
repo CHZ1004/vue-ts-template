@@ -2,6 +2,7 @@ import { App } from 'vue';
 import { createRouter, createWebHashHistory } from 'vue-router';
 import { lowerCase } from 'lodash-es';
 import { ROUTE_NAMES } from './namespace';
+import { createRouterGuard } from './guard';
 
 const { VITE_BASE_URL } = import.meta.env;
 const { HOME, INSPECTION, SCENE, LOGIN } = ROUTE_NAMES;
@@ -40,8 +41,10 @@ export const router = createRouter({
   routes,
 });
 
-export function setupRouter(app: App) {
+export async function setupRouter(app: App) {
   app.use(router);
+  createRouterGuard(router);
+  await router.isReady();
 }
 
 export * from './namespace';

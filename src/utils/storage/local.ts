@@ -23,10 +23,11 @@ class CreateLocalStorage<T extends Local = Local> {
 
   public get<K extends keyof T>(key: K) {
     const json = window.localStorage.getItem(key as string);
-    let storageData: StorageData<T[K]> | null = null;
-    if (!json || !storageData) return null;
+    if (!json) return null;
     try {
+      let storageData: StorageData<T[K]> | null = null;
       storageData = decrypto(json);
+      if (!storageData) return null;
       const { value, expire } = storageData!;
       if (expire === null || expire >= Date.now()) {
         return value;

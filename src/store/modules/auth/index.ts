@@ -1,8 +1,8 @@
 import { defineStore } from 'pinia';
-import { router } from '@/router';
+import { LOGIN, router } from '@/router';
 import { STORE_NAMES } from '../../namespace';
-import { LoginParams, LoginResponse, fetchLogin } from '@/api';
-import { getToken, wait } from '@/utils';
+import { LoginParams, LoginResponse, fetchLogin, fetchLogout } from '@/api';
+import { getToken, setToken, wait, local } from '@/utils';
 
 interface AuthState {
   token: string;
@@ -20,6 +20,15 @@ export const useAuthStore = defineStore(STORE_NAMES.AUTH, {
     },
   },
   actions: {
+    /** 账号密码登录获取token */
+    async login(params: LoginParams) {
+      this.loginLoading = true;
+      const data = await fetchLogin(params).send();
+      if (data) {
+        await this.handleActionAfterLogin(data);
+      }
+      this.loginLoading = false;
+    },
     /** 登录后处理 */
     async handleActionAfterLogin(data: LoginResponse) {
       const { token } = data;
@@ -28,24 +37,20 @@ export const useAuthStore = defineStore(STORE_NAMES.AUTH, {
         router.push({ name: 'HOME', replace: true });
       }
     },
-    /** 账号密码登录获取token */
-    async login(params: LoginParams) {
-      this.loginLoading = true;
-      await wait(1000);
-      const data = await fetchLogin(params).send();
-      if (data) {
-        await this.handleActionAfterLogin(data);
-      }
-      this.loginLoading = false;
-    },
     /** token登录获取用户信息 */
     async loginByToken(token: string) {
-      getToken();
+      setToken(token);
       // TODO 根据token获取用户信息, 并存储
       const successFlag = true;
       await wait(0);
       this.token = token;
       return successFlag;
+    },
+    /** 退出登录 */
+    async logout() {
+      await fetchLogout().send();
+      local.clear();
+      router.push({ name: LOGIN, replace: true });
     },
   },
 });

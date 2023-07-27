@@ -1,18 +1,7 @@
-import { createDiscreteApi } from 'naive-ui';
+export function successMessage(msg: string) {
+  window.$message?.success(msg);
+}
 
-const useDiscreteApi = () => {
-  const { message } = createDiscreteApi(['message'], {
-    // configProviderProps: configProviderPropsRef,
-  });
-  return {
-    successMessage: (msg: string) => {
-      message.success(msg);
-    },
-    errorMessage: (msg: string) => {
-      message.error(msg);
-    },
-  };
-};
-
-const { successMessage, errorMessage } = useDiscreteApi();
-export { successMessage, errorMessage };
+export function errorMessage(msg: string) {
+  window.$message?.error(msg);
+}
