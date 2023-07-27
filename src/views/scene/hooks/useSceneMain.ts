@@ -1,7 +1,8 @@
 import { useRequest } from 'alova';
 import { Scene, Group, getPageScenes, sceneCopy, sceneDelete, sceneMove, sceneSave } from '@/api';
 import { successMessage, events, EventType } from '@/utils';
-import { useMoveDialog } from '@/hooks';
+import { useMoveDialog, useSceneDialog } from '@/hooks';
+// import SceneModel from '@/components/custom/sceneModel/index.vue';
 
 export function useSceneMain(groupId: globalThis.Ref<string>) {
   const params = ref({
@@ -36,9 +37,22 @@ export function useSceneMain(groupId: globalThis.Ref<string>) {
     successMessage(msg);
     isRefresh && events.emit(EventType.RefreshGroups);
   };
-  const onEdit = async (value: Scene) => {
-    await sceneSave(value).send();
-    finishing('编辑成功', false);
+
+  const { open: sceneOpen } = useSceneDialog({
+    success: async (res) => {
+      await sceneSave(res).send();
+      successMessage('新增成功');
+    },
+    options: {
+      title: '新增场景',
+      style: { width: '60vw' },
+    },
+  });
+  const onEdit = async (id: string) => {
+    sceneOpen({ id });
+    // console.log('🚀 ~ id:', id);
+    // await sceneSave(value).send();
+    // finishing('编辑成功', false);
   };
   const onCopy = async (id: string) => {
     await sceneCopy(id).send();

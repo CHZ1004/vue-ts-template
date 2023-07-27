@@ -22,11 +22,27 @@
 </template>
 <script setup lang="ts">
 import { FormInst } from 'naive-ui';
-import { getSystemList, Scene, DisplayTypeEnum } from '@/api';
-import { SystemForm } from './components';
+import { Scene } from '@/api';
 import { events } from '@/utils';
+import { DisplayTypeEnum } from '@/enums';
+import { SystemForm } from './components';
 import { createIndicatorData, createTemplateData, DisplayType, rules } from './helpers';
 
+const props = defineProps<{
+  id?: string;
+}>();
+const initEdit = async (id: string) => {
+  const res = await getSceneDetail(id).send();
+  Object.assign(model.value, {
+    ...res,
+    templateData: JSON.parse(res.templateData as string),
+  });
+};
+onMounted(() => {
+  if (props.id) {
+    initEdit(props.id);
+  }
+});
 const { data: systemOptions } = useRequest(getSystemList, { initialData: [] });
 
 const formRef = ref<FormInst | null>(null);

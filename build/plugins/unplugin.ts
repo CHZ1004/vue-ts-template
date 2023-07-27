@@ -40,7 +40,7 @@ export function configUnpluginPlugin(viteEnv: ImportMetaEnv): PluginOption[] {
       include,
       exclude,
       imports,
-      dirs: ['src/store/modules', 'src/store/subscribe'],
+      dirs: ['src/store/modules', 'src/store/subscribe', 'src/api/modules'],
     }),
     Components({
       include,

@@ -37,8 +37,10 @@ const chartOptions = computed(() => handleMap(isBPC.value ? BpcChartMap : ChartM
 const indicatorValues = computed(() => props.indicatorOptions.map(({ value }) => value));
 
 const indicator = computed({
-  set(value) {
+  set(value: string) {
     Reflect.set(props.data, 'indicator', value);
+    const data = props.indicatorOptions.filter((item) => item.value === value);
+    Reflect.set(props.data, 'label', data[0].label);
   },
   get() {
     if (props.data.indicator && !indicatorValues.value.includes(props.data.indicator)) {

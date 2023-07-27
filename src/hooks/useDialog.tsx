@@ -1,6 +1,7 @@
 import { DialogOptions, NButton, useDialog } from 'naive-ui';
 import IconMdiClose from '~icons/mdi/close';
 import type { Scene, Group, Inspection } from '@/api';
+import SceneModel from '@/components/custom/sceneModel/index.vue';
 
 const DialogTitle = defineComponent({
   props: {
@@ -129,12 +130,17 @@ export function useSwitchDialog({ success, options }: { success: () => void; opt
   };
 }
 interface UseDialog {
-  success: (() => Promise<void>) | (() => void);
+  success: ((data: any) => Promise<void>) | ((data: any) => void);
   options: DialogOptions;
 }
 export function useSceneDialog({ options, success }: UseDialog) {
+  const sceneRef = ref<InstanceType<typeof SceneModel> | null>(null);
   const dialog = useDialog();
-  const open = () => {
+  const confirm = async () => {
+    const res = await sceneRef.value?.confirm();
+    await success(res);
+  };
+  const open = (props: any) => {
     const { destroy } = dialog.create({
       ...options,
       showIcon: false,
@@ -142,7 +148,13 @@ export function useSceneDialog({ options, success }: UseDialog) {
       maskClosable: false,
       autoFocus: false,
       title: () => h(DialogTitle, { destroy, title: (options.title || '') as string }),
-      action: () => h(DialogAction, { destroy, confirm: success }),
+      content: () => {
+        return h(SceneModel, {
+          ref: sceneRef,
+          ...props,
+        });
+      },
+      action: () => h(DialogAction, { destroy, confirm }),
     });
   };
   return {

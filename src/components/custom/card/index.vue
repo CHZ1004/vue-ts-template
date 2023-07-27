@@ -12,7 +12,7 @@
             <icon-ant-design:copy-outlined class="mr-1 text-xl" />
             <span>复制场景</span>
           </div>
-          <div class="flex-y-center h-8 px-1 cursor-pointer hover:bg-blue-100">
+          <div class="flex-y-center h-8 px-1 cursor-pointer hover:bg-blue-100" @click="edit(data[value])">
             <icon-ant-design:edit-twotone class="mr-1 text-xl" />
             <span>编辑场景</span>
           </div>
@@ -59,6 +59,9 @@ const props = withDefaults(defineProps<Props>(), {
 
 const editName = (name: string) => {
   emit('edit', { ...props.data, [props.label]: name });
+};
+const edit = (id: string) => {
+  emit('edit', id);
 };
 const copy = (id: string) => {
   emit('copy', id);

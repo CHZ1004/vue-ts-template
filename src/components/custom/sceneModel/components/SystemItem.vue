@@ -128,6 +128,7 @@ const ipIdListRef = ref();
 const ipIdList = computed({
   set(value: string[] | null) {
     Reflect.set(props.systemData, 'ips', handleIpAddressList(unref(ipOptions), value));
+    Reflect.set(props.systemData, 'isDB', isDB.value);
     return Reflect.set(props.systemData, 'ipIdList', value);
   },
   get() {

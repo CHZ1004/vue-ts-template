@@ -1,4 +1,5 @@
-import { SystemDetailIps, System, SceneTemplate, DisplayTypeEnum } from '@/api';
+import type { SystemDetailIps, System, SceneTemplate } from '@/api';
+import { DisplayTypeEnum } from '@/enums';
 import { events } from '@/utils';
 
 export const DisplayType = [

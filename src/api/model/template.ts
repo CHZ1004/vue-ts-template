@@ -1,3 +1,5 @@
+import { DisplayTypeEnum } from '@/enums';
+
 interface BaseResponseInfo extends Record<string, any> {
   createBy?: string;
   createTime?: string;
@@ -25,10 +27,10 @@ export interface Inspection extends BaseResponseInfo {
   granularity: string;
 }
 
-export enum DisplayTypeEnum {
-  system = 'system',
-  time = 'time',
-}
+// export enum DisplayTypeEnum {
+//   system = 'system',
+//   time = 'time',
+// }
 export interface SceneTemplate {
   key: string;
   system: string | null;

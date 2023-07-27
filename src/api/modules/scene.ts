@@ -4,6 +4,7 @@ import type { Group, Scene, Page, PageResponse } from '../model';
 enum Api {
   SceneList = 'template/list',
   ScenePageList = 'template/page',
+  SceneDetail = 'template/detail',
   SaveScene = 'template/save',
   SceneCopy = 'template/copy',
   SceneDelete = 'template/delete',
@@ -23,6 +24,11 @@ export const getScenes = (groupId: string) => {
 /** 分页获取场景模板 */
 export const getPageScenes = (params: Page) => {
   return alovaInstance.Get<PageResponse<Scene>>(Api.ScenePageList, { params });
+};
+
+/** 根据ID获取场景模板详情 */
+export const getSceneDetail = (templateId: string) => {
+  return alovaInstance.Get<Scene>(Api.SceneDetail, { params: { templateId } });
 };
 
 /** 编辑/新增场景模板 */
