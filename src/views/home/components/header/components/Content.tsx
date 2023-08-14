@@ -18,7 +18,7 @@ export const Content = defineComponent({
       },
     );
     const switchScene = async ({ templateId, templateName }: Scene) => {
-      await setEnableScene(templateId).send();
+      await setEnableScene(templateId as string).send();
       await send(value.value);
       successMessage('修改成功');
       emit('change', templateName);

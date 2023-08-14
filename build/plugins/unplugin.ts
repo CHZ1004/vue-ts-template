@@ -20,7 +20,7 @@ export function configUnpluginPlugin(viteEnv: ImportMetaEnv): PluginOption[] {
     'pinia',
     'vue-router',
     {
-      '@vueuse/core': [],
+      '@vueuse/core': ['useElementSize', 'useFullscreen'],
       nanoid: ['nanoid'],
       alova: ['useRequest'],
     },
@@ -40,7 +40,7 @@ export function configUnpluginPlugin(viteEnv: ImportMetaEnv): PluginOption[] {
       include,
       exclude,
       imports,
-      dirs: ['src/store/modules', 'src/store/subscribe', 'src/api/modules'],
+      dirs: ['src/store/modules', 'src/store/subscribe', 'src/api/modules', 'src/utils'],
     }),
     Components({
       include,

@@ -32,13 +32,13 @@ const DialogAction = defineComponent({
       props.destroy && props.destroy();
     };
     const confirm = async () => {
-      let hide = true;
+      // let hide = true;
       try {
         if (props.confirm) {
           loading.value = true;
-          hide = await props.confirm();
+          await props.confirm();
         }
-        hide && destroy();
+        destroy();
       } finally {
         loading.value = false;
       }

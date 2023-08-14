@@ -133,6 +133,15 @@ export const DbIndicatorMap: Record<string, string> = {
   CURRENT_SESSION: '数据库当前会话数',
   ACTIVE_SESSION: '数据库活动会话数',
 };
-export const otherIndicator = {
+export const OtherIndicator: Record<string, string> = {
   BPC: 'BPC',
+};
+export const UniteIndicator: Record<string, string> = {
+  IOPS: 'IOPS',
+  TRAFFIC: 'TRAFFIC',
+};
+export const AllIndicator: Record<string, string> = {
+  ...BpcChartMap,
+  ...IndicatorMap,
+  ...DbIndicatorMap,
 };

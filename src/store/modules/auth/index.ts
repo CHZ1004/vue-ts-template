@@ -2,7 +2,7 @@ import { defineStore } from 'pinia';
 import { LOGIN, router } from '@/router';
 import { STORE_NAMES } from '../../namespace';
 import { LoginParams, LoginResponse, fetchLogin, fetchLogout } from '@/api';
-import { getToken, setToken, wait, local } from '@/utils';
+import { getToken, setToken, wait, local, successMessage } from '@/utils';
 
 interface AuthState {
   token: string;
@@ -35,6 +35,7 @@ export const useAuthStore = defineStore(STORE_NAMES.AUTH, {
       const loginSuccess = await this.loginByToken(token);
       if (loginSuccess) {
         router.push({ name: 'HOME', replace: true });
+        successMessage('登录成功');
       }
     },
     /** token登录获取用户信息 */

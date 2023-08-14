@@ -52,7 +52,7 @@ import Indicator from './Indicator.vue';
 import { renderSystemLabel, renderIpLabel, handleIpIdList, handleIpAddressList, rules } from '../helpers';
 
 interface Props {
-  systemData: SceneTemplate & { isBPC: boolean };
+  systemData: SceneTemplate & { isBPC: boolean; isBpc: boolean };
   index: number;
   systemOptions: System[];
   showTime?: boolean;
@@ -151,7 +151,10 @@ const indicatorList = computed({
     return Reflect.get(props.systemData, 'dataList');
   },
 });
-const isBPC = computed(() => props.systemData.isBPC || false);
+const isBPC = computed(() => {
+  console.log('🚀 ~ props.systemData:', props.systemData);
+  return props.systemData.isBPC || props.systemData.isBpc || false;
+});
 const isDB = computed(() =>
   unref(ipOptions).some(({ addressName }) => {
     return addressName.includes('数据库') || addressName.toLocaleLowerCase().includes('DB');

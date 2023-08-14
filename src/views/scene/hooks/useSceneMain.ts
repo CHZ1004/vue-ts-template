@@ -50,9 +50,6 @@ export function useSceneMain(groupId: globalThis.Ref<string>) {
   });
   const onEdit = async (id: string) => {
     sceneOpen({ id });
-    // console.log('🚀 ~ id:', id);
-    // await sceneSave(value).send();
-    // finishing('编辑成功', false);
   };
   const onCopy = async (id: string) => {
     await sceneCopy(id).send();

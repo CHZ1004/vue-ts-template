@@ -27,7 +27,7 @@ import { useScroll } from '@vueuse/core';
 import Draggable from 'vuedraggable';
 import HoveHandle from './HoveHandle.vue';
 import IndicatorItem from './IndicatorItem.vue';
-import { DbIndicatorMap, IndicatorMap, handleMap, otherIndicator, handleIndicator } from '../helpers';
+import { DbIndicatorMap, IndicatorMap, handleMap, OtherIndicator, handleIndicator } from '../helpers';
 
 interface Props {
   list: Array<any>;
@@ -62,7 +62,7 @@ const deleteAndMoveHide = computed(() => props.list.length < 2);
 const indicatorOptions = computed(() => {
   const _IndicatorMap = { ...IndicatorMap };
   if (isBPC.value) {
-    Object.assign(_IndicatorMap, otherIndicator);
+    Object.assign(_IndicatorMap, OtherIndicator);
   }
   if (isDB.value) {
     Object.assign(_IndicatorMap, DbIndicatorMap);

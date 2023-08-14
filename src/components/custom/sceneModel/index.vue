@@ -16,13 +16,17 @@
         v-model:granularity="model.granularity"
         path="templateTime"
       />
-      <SystemForm :system-options="systemOptions" :show-time="hideDateTime" :list="model.templateData" />
+      <SystemForm
+        :system-options="systemOptions"
+        :show-time="hideDateTime"
+        :list="(model.templateData  as SceneTemplate[])"
+      />
     </n-form>
   </n-card>
 </template>
 <script setup lang="ts">
 import { FormInst } from 'naive-ui';
-import { Scene } from '@/api';
+import { Scene, SceneTemplate } from '@/api';
 import { events } from '@/utils';
 import { DisplayTypeEnum } from '@/enums';
 import { SystemForm } from './components';

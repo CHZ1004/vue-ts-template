@@ -27,10 +27,11 @@ export interface Inspection extends BaseResponseInfo {
   granularity: string;
 }
 
-// export enum DisplayTypeEnum {
-//   system = 'system',
-//   time = 'time',
-// }
+export interface SceneTemplateItem {
+  key: string;
+  indicator: string | null;
+  type: string | null;
+}
 export interface SceneTemplate {
   key: string;
   system: string | null;
@@ -41,11 +42,7 @@ export interface SceneTemplate {
   time?: string;
   granularity?: string;
   timeType?: string;
-  dataList: {
-    key: string;
-    indicator?: string | null;
-    type?: string | null;
-  }[];
+  dataList: SceneTemplateItem[];
 }
 export interface Scene extends BaseResponseInfo {
   templateId?: string;
