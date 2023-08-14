@@ -8,6 +8,8 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest # 构建环境使用 ubuntu
+    permissions:
+      contents: read
     steps:
       - name: Checkout
         uses: actions/checkout@v3
