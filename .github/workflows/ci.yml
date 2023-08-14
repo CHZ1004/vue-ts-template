@@ -16,7 +16,7 @@ jobs:
         run: |
           npm install -g pnpm
           pnpm install
-          npm build
+          pnpm build
 
       - name: Deploy # 将打包内容发布到 github page
         uses: JamesIves/github-pages-deploy-action@3.5.9 # 使用别人写好的 actions
