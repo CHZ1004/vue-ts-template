@@ -1,0 +1,10 @@
+export enum ROUTE_NAMES {
+  HOME = 'HOME',
+  LOGIN = 'LOGIN',
+  INSPECTION = 'INSPECTION',
+  SCENE = 'SCENE',
+}
+export const HOME = 'HOME' as ROUTE_NAMES.HOME;
+export const LOGIN = 'LOGIN' as ROUTE_NAMES.LOGIN;
+export const INSPECTION = 'INSPECTION' as ROUTE_NAMES.INSPECTION;
+export const SCENE = 'SCENE' as ROUTE_NAMES.SCENE;
